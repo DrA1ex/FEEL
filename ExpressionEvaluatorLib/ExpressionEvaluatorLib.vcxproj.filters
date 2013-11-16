@@ -44,9 +44,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ExpressionEvaluatorLib.h">
-      <Filter>Headers</Filter>
-    </ClInclude>
     <ClInclude Include="Expression\ExpressionImplementation.h">
       <Filter>Headers\Expression</Filter>
     </ClInclude>
@@ -103,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Operators\Unary\AbsOperator.h">
       <Filter>Headers\Operators\Unary</Filter>
+    </ClInclude>
+    <ClInclude Include="ExpressionEvaluatorLib.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

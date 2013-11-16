@@ -5,16 +5,53 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorLib", "ExpressionEvaluatorLib\ExpressionEvaluatorLib.vcxproj", "{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorNet", "ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj", "{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C} = {83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionCalculatorDemo", "ExpressionCalculatorDemo\ExpressionCalculatorDemo.csproj", "{13EF459C-41E5-49E3-87D5-56D27371B3DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Win32.ActiveCfg = Debug|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Win32.Build.0 = Debug|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Any CPU.ActiveCfg = Release|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Win32.ActiveCfg = Release|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Win32.Build.0 = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Mixed Platforms.Build.0 = Debug|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Win32.ActiveCfg = Debug|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Win32.Build.0 = Debug|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Any CPU.ActiveCfg = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Mixed Platforms.ActiveCfg = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Mixed Platforms.Build.0 = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Win32.ActiveCfg = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Win32.Build.0 = Release|Win32
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
