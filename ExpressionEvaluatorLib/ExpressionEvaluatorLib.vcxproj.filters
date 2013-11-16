@@ -1,132 +1,131 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Файлы исходного кода">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Заголовочные файлы">
+    <Filter Include="Headers">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Файлы ресурсов">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
-    <Filter Include="Заголовочные файлы\Common">
+    <Filter Include="Headers\Common">
       <UniqueIdentifier>{794081fa-8cb6-410b-9ba9-e7d150cff290}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\Expression">
+    <Filter Include="Headers\Expression">
       <UniqueIdentifier>{a9c3bbac-3f72-4baa-b059-4aefa84ce31b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\Expression\Internal">
+    <Filter Include="Headers\Expression\Internal">
       <UniqueIdentifier>{47529a50-285b-4826-8929-b857de67d4f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы исходного кода\Expression">
-      <UniqueIdentifier>{58cbee35-1c69-4afa-86a7-9d822c73a3c1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Файлы исходного кода\Expression\Internal">
-      <UniqueIdentifier>{2c28b93a-371d-48fd-801c-5b746d3f4061}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\Operators">
+    <Filter Include="Headers\Operators">
       <UniqueIdentifier>{339303a1-71d5-43bd-bf5d-6ca637536484}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\Operators\Binary">
+    <Filter Include="Headers\Operators\Binary">
       <UniqueIdentifier>{bee413cc-c0ea-4bcc-be6b-32e7d0aa8c4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\Operators\Unary">
-      <UniqueIdentifier>{971dad84-9bb2-46d8-b2b2-40ae21de9e63}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Заголовочные файлы\Operators\Binary\Base">
+    <Filter Include="Headers\Operators\Binary\Base">
       <UniqueIdentifier>{c70d6124-83f0-4de0-bab0-0388b875309c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Заголовочные файлы\Operators\Unary\Base">
+    <Filter Include="Headers\Operators\Unary">
+      <UniqueIdentifier>{971dad84-9bb2-46d8-b2b2-40ae21de9e63}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Operators\Unary\Base">
       <UniqueIdentifier>{d85f09a4-a5ef-4e10-b0dc-4aa12ee9485c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы исходного кода\Common">
+    <Filter Include="Sources">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Sources\Expression">
+      <UniqueIdentifier>{58cbee35-1c69-4afa-86a7-9d822c73a3c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Expression\Internal">
+      <UniqueIdentifier>{2c28b93a-371d-48fd-801c-5b746d3f4061}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sources\Common">
       <UniqueIdentifier>{9e41917b-ee3a-41cf-93e0-9e226319dd77}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ExpressionEvaluatorLib.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Expression\ExpressionImplementation.h">
-      <Filter>Заголовочные файлы\Expression</Filter>
+      <Filter>Headers\Expression</Filter>
     </ClInclude>
     <ClInclude Include="Expression\Internal\Token.h">
-      <Filter>Заголовочные файлы\Expression\Internal</Filter>
+      <Filter>Headers\Expression\Internal</Filter>
     </ClInclude>
     <ClInclude Include="Expression\Internal\Lexeme.h">
-      <Filter>Заголовочные файлы\Expression\Internal</Filter>
+      <Filter>Headers\Expression\Internal</Filter>
     </ClInclude>
     <ClInclude Include="Operators\OperatorBase.h">
-      <Filter>Заголовочные файлы\Operators</Filter>
+      <Filter>Headers\Operators</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\AddOperator.h">
-      <Filter>Заголовочные файлы\Operators\Binary</Filter>
+      <Filter>Headers\Operators\Binary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\DivOperator.h">
-      <Filter>Заголовочные файлы\Operators\Binary</Filter>
+      <Filter>Headers\Operators\Binary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\MulOperator.h">
-      <Filter>Заголовочные файлы\Operators\Binary</Filter>
+      <Filter>Headers\Operators\Binary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\SubOperator.h">
-      <Filter>Заголовочные файлы\Operators\Binary</Filter>
+      <Filter>Headers\Operators\Binary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\Base\BinaryOperatorBase.h">
-      <Filter>Заголовочные файлы\Operators\Binary\Base</Filter>
+      <Filter>Headers\Operators\Binary\Base</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\CosOperator.h">
-      <Filter>Заголовочные файлы\Operators\Unary</Filter>
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\NegOperator.h">
-      <Filter>Заголовочные файлы\Operators\Unary</Filter>
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\SinOperator.h">
-      <Filter>Заголовочные файлы\Operators\Unary</Filter>
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\TanOperator.h">
-      <Filter>Заголовочные файлы\Operators\Unary</Filter>
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\СtanOperator.h">
-      <Filter>Заголовочные файлы\Operators\Unary</Filter>
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Unary\Base\UnaryOperatorBase.h">
-      <Filter>Заголовочные файлы\Operators\Unary\Base</Filter>
+      <Filter>Headers\Operators\Unary\Base</Filter>
     </ClInclude>
     <ClInclude Include="Common\Assembler.h">
-      <Filter>Заголовочные файлы\Common</Filter>
+      <Filter>Headers\Common</Filter>
     </ClInclude>
     <ClInclude Include="Typedefs.h">
-      <Filter>Заголовочные файлы</Filter>
+      <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\PowOperator.h">
-      <Filter>Заголовочные файлы\Operators\Binary</Filter>
+      <Filter>Headers\Operators\Binary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Unary\AbsOperator.h">
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpressionEvaluatorLib.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
-      <Filter>Файлы исходного кода</Filter>
+      <Filter>Sources</Filter>
     </ClCompile>
     <ClCompile Include="Expression\ExpressionImplementation.cpp">
-      <Filter>Файлы исходного кода\Expression</Filter>
+      <Filter>Sources\Expression</Filter>
     </ClCompile>
     <ClCompile Include="Expression\Internal\Token.cpp">
-      <Filter>Файлы исходного кода\Expression\Internal</Filter>
+      <Filter>Sources\Expression\Internal</Filter>
     </ClCompile>
     <ClCompile Include="Expression\Internal\ExpressionInitialization.cpp">
-      <Filter>Файлы исходного кода\Expression\Internal</Filter>
+      <Filter>Sources\Expression\Internal</Filter>
     </ClCompile>
     <ClCompile Include="Expression\Internal\ExpressionParser.cpp">
-      <Filter>Файлы исходного кода\Expression\Internal</Filter>
+      <Filter>Sources\Expression\Internal</Filter>
     </ClCompile>
     <ClCompile Include="Common\Assembler.cpp">
-      <Filter>Файлы исходного кода\Common</Filter>
+      <Filter>Sources\Common</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

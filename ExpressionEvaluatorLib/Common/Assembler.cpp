@@ -184,6 +184,14 @@ Assembler & Assembler::Neg()
 	return *this;
 }
 
+Assembler & Assembler::Abs()
+{
+	Write<Byte>(0xD9);
+	Write<Byte>(0xE1);
+
+	return *this;
+}
+
 Assembler & Assembler::Pop()
 {
 	Write<Byte>(0xDD);

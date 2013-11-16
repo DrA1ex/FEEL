@@ -45,6 +45,7 @@ public:
 	Assembler &Tan();
 
 	Assembler &Neg();
+	Assembler &Abs();
 
 
 	inline ExpressionBytes GetData() const
