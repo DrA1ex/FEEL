@@ -8,6 +8,7 @@
 #include "..\..\Operators\Unary\ÑtanOperator.h"
 #include "..\..\Operators\Unary\SinOperator.h"
 #include "..\..\Operators\Unary\NegOperator.h"
+#include "..\..\Operators\Unary\AbsOperator.h"
 
 OperatorsDictonary ExpressionImplementation::_operators;
 bool ExpressionImplementation::_initialized = false;
@@ -30,6 +31,7 @@ void ExpressionImplementation::Init()
 
 	//Unary operations
 	AddNewOperation(new NegOperator());
+	AddNewOperation(new AbsOperator());
 
 	AddNewOperation(new CosOperator());
 	AddNewOperation(new SinOperator());
