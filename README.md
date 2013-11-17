@@ -35,8 +35,8 @@ C# compiled code:       3336ms (~2$ slower)
 
 C++ Benchmark results:
 Library name            Avg. time
-FEEL (this library):    2194ms
-ExprEval:               3253ms (~48% slower)
+FEEL (this library):    1943ms
+ExprEval:               3253ms (~67% slower)
 
-C++ compiled code:      1120ms (~50% faster)
+C++ compiled code:      1120ms (~40% faster)
 ```
