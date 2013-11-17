@@ -16,11 +16,15 @@ class EXPRESSIONEVALUATORLIB_API Expression
 	ExpressionImplementation * const _impl;
 
 public:
+
+	//Compiles expression from the "expression"
 	explicit Expression(std::string expression);
 	~Expression();
 
+	//Returns reference to Parameters dictionary
 	Parameters &GetParameters();
 
+	//Executes expression and return result
 	ValueType Execute() const;
 
 };
