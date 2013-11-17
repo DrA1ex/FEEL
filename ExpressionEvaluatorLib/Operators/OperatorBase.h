@@ -26,6 +26,7 @@ public:
 	virtual const char *OperatorName() const = 0;
 	virtual OperatorType Type() const = 0;
 	virtual OperatorPriority Priority() const = 0;
+	virtual bool IsLeftAssociative() const { return Priority() == Highest; }
 };
 
 typedef std::map<std::string, std::shared_ptr<OperatorBase>> OperatorsDictonary;

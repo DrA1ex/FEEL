@@ -234,10 +234,21 @@ std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(std::vector
 										  stack.emplace(currentLexeme);
 									  else
 									  {
-										  while(!stack.empty() && (stack.top().Type == Lexeme::Operation && currentOperationPriority
-											  <= GetOperationFromLexeme(stack.top())->Priority()))
+										  if(!operation->IsLeftAssociative())
 										  {
-											  result.push_back(ConstructFromLexeme(pop(stack)));
+											  while(!stack.empty() && (stack.top().Type == Lexeme::Operation && currentOperationPriority
+												  <= GetOperationFromLexeme(stack.top())->Priority()))
+											  {
+												  result.push_back(ConstructFromLexeme(pop(stack)));
+											  }
+										  }
+										  else
+										  {
+											  while(!stack.empty() && (stack.top().Type == Lexeme::Operation && currentOperationPriority
+												  < GetOperationFromLexeme(stack.top())->Priority()))
+											  {
+												  result.push_back(ConstructFromLexeme(pop(stack)));
+											  }
 										  }
 
 										  stack.emplace(currentLexeme);
