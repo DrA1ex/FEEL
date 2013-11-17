@@ -13,6 +13,8 @@ ExpressionImplementation::ExpressionImplementation(std::string expression) : _ex
 	if(!_initialized)
 	{
 		Init();
+
+		_initialized = true;
 	}
 
 	CompileExpression();
