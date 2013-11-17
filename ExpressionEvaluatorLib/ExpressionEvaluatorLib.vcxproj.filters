@@ -83,9 +83,6 @@
     <ClInclude Include="Operators\Unary\TanOperator.h">
       <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
-    <ClInclude Include="Operators\Unary\СtanOperator.h">
-      <Filter>Headers\Operators\Unary</Filter>
-    </ClInclude>
     <ClInclude Include="Operators\Unary\Base\UnaryOperatorBase.h">
       <Filter>Headers\Operators\Unary\Base</Filter>
     </ClInclude>
@@ -106,6 +103,21 @@
     </ClInclude>
     <ClInclude Include="Helpers.h">
       <Filter>Headers\Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\ModOperator.h">
+      <Filter>Headers\Operators\Binary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Unary\SqrtOperator.h">
+      <Filter>Headers\Operators\Unary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Unary\CeilOperator.h">
+      <Filter>Headers\Operators\Unary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Unary\FloorOperator.h">
+      <Filter>Headers\Operators\Unary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Unary\СtanOperator.h">
+      <Filter>Headers\Operators\Unary</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -39,15 +39,18 @@ void ProcessLexeme(std::vector<Lexeme> &lexemes, SymbolType type, const std::str
 		{
 						   std::string dataCopy = data;
 
-						   if(lexemes.size() >= 2)
+						   if(lexemes.size() >= 1)
 						   {
 							   auto lastLexeme = lexemes.back();
-							   auto preLastLexeme = *(lexemes.end() - 2);
+
+							   Lexeme preLastLexeme(Lexeme::None);
+							   if(lexemes.size() >= 2)
+								   preLastLexeme = *(lexemes.end() - 2);
 
 							   //if last lexeme is sign and previous lexeme is operation\bracket, 
 							   //so we can say, that this sign relates with number
 							   if(lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
-								   && (preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
+								   && (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
 							   {
 								   lexemes.pop_back();
 								   if(lastLexeme.LexemeData == "-")
@@ -61,15 +64,18 @@ void ProcessLexeme(std::vector<Lexeme> &lexemes, SymbolType type, const std::str
 		case Symbol:
 		case Character:
 		{
-						  if(lexemes.size() >= 2)
+						  if(lexemes.size() >= 1)
 						  {
 							  auto lastLexeme = lexemes.back();
-							  auto preLastLexeme = *(lexemes.end() - 2);
+
+							  Lexeme preLastLexeme(Lexeme::None);
+							  if(lexemes.size() >= 2)
+								  preLastLexeme = *(lexemes.end() - 2);
 
 							  //if last lexeme is sign and previous lexeme is operation\bracket, 
 							  //so we can say, that this sign relates with variable\operation
 							  if(lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
-								  && (preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
+								  && (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
 							  {
 								  if(lastLexeme.LexemeData == "-")
 									  lexemes.back().LexemeData = "neg";
@@ -167,19 +173,6 @@ Token ExpressionImplementation::ConstructFromLexeme(Lexeme lexeme) const
 	throw std::logic_error(MakeString() << "Unsupported lexeme type: " << lexeme.Type << " with data: " << lexeme.LexemeData);
 }
 
-
-template<class T>
-T pop(std::stack<T> &stack)
-{
-	if(stack.empty())
-		throw std::runtime_error("Syntactic error.");
-
-	T value = stack.top();
-	stack.pop();
-
-	return value;
-}
-
 const OperatorBase* ExpressionImplementation::GetOperationFromLexeme(Lexeme lexeme) const
 {
 	if(_operators.find(lexeme.LexemeData) != _operators.end())
@@ -206,7 +199,8 @@ std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(std::vector
 				break;
 
 			case Lexeme::Variable:
-				_parameters[currentLexeme.LexemeData] = NAN;
+				if(_parameters.find(currentLexeme.LexemeData) == _parameters.end())
+					_parameters[currentLexeme.LexemeData] = NAN;
 				result.emplace_back(ConstructFromLexeme(currentLexeme));
 				break;
 

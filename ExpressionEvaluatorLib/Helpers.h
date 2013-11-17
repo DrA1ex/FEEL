@@ -18,4 +18,16 @@ protected:
 	std::stringstream m_stream;
 };
 
+template<class T>
+T pop(std::stack<T> &stack)
+{
+	if(stack.empty())
+		throw std::runtime_error("Syntactic error.");
+
+	T value = stack.top();
+	stack.pop();
+
+	return value;
+}
+
 #endif // Helpers_h__

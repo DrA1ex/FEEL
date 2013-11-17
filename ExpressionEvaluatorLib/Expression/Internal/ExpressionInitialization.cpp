@@ -10,6 +10,10 @@
 #include "..\..\Operators\Unary\NegOperator.h"
 #include "..\..\Operators\Unary\AbsOperator.h"
 #include "..\..\Operators\Binary\PowOperator.h"
+#include "..\..\Operators\Binary\ModOperator.h"
+#include "..\..\Operators\Unary\CeilOperator.h"
+#include "..\..\Operators\Unary\FloorOperator.h"
+#include "..\..\Operators\Unary\SqrtOperator.h"
 
 OperatorsDictonary ExpressionImplementation::_operators;
 bool ExpressionImplementation::_initialized = false;
@@ -29,6 +33,7 @@ void ExpressionImplementation::Init()
 	AddNewOperation(new SubOperator());
 	AddNewOperation(new MulOperator());
 	AddNewOperation(new DivOperator());
+	AddNewOperation(new ModOperator());
 
 	AddNewOperation(new PowOperator());
 
@@ -40,4 +45,9 @@ void ExpressionImplementation::Init()
 	AddNewOperation(new SinOperator());
 	AddNewOperation(new TanOperator());
 	AddNewOperation(new CtanOperator());
+
+	AddNewOperation(new CeilOperator());
+	AddNewOperation(new FloorOperator());
+
+	AddNewOperation(new SqrtOperator());
 }

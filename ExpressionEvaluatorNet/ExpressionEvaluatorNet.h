@@ -20,6 +20,8 @@ namespace ExpressionEvaluatorNet {
 
 		void SetVariableValue(String^ name, double value);
 
+		double GetVariableValue(String^ name);
+
 		array<String^>^ Variables();
 	};
 }

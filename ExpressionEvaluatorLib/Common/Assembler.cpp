@@ -210,3 +210,19 @@ Assembler & Assembler::Free(Byte registerNumber)
 
 	return *this;
 }
+
+Assembler & Assembler::Sqrt()
+{
+	Write<Byte>(0xD9);
+	Write<Byte>(0xFA);
+
+	return *this;
+}
+
+Assembler & Assembler::Mod()
+{
+	Write<Byte>(0xD9);
+	Write<Byte>(0xF8);
+
+	return *this;
+}

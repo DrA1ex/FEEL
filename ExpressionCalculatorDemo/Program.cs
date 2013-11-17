@@ -7,8 +7,8 @@ namespace ExpressionCalculatorDemo
     {
         static void Main()
         {
-            Console.WriteLine("Supported operations: +,-,*,/,^");
-            Console.WriteLine("Supported functions: cos, sin, tan, ctan, abs");
+            Console.WriteLine("Supported operations: +,-,*,/,^,%");
+            Console.WriteLine("Supported functions: cos, sin, tan, ctan, abs, floor, ceil, sqrt");
             Console.WriteLine("You can also use variables (word) and brackets");
             Console.WriteLine("Enter a expression to compute (e.g. (1+2)^(2 + sin(x))-1 )");
 
@@ -19,6 +19,9 @@ namespace ExpressionCalculatorDemo
 
             foreach (var variable in variables)
             {
+                if (!double.IsNaN(expr.GetVariableValue(variable)))
+                    continue;
+
                 Console.WriteLine("Enter value of '{0}':", variable);
 
                 string valueString;

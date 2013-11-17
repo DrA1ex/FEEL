@@ -17,6 +17,7 @@ public:
 	mutable ExpressionBytes _compiledExpressionBytes;
 	mutable std::vector<ValueType> _memory;
 	mutable Parameters _parameters;
+	mutable std::vector<Token> _tokens;
 	std::string _expression;
 
 	static OperatorsDictonary _operators;

@@ -3,10 +3,14 @@
 
 #include <Windows.h>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include "ExpressionImplementation.h"
 #include "..\Typedefs.h"
 #include "..\Operators\Unary\Base\UnaryOperatorBase.h"
 #include "..\Operators\Binary\Base\BinaryOperatorBase.h"
+#include "..\Helpers.h"
 
 ExpressionImplementation::ExpressionImplementation(std::string expression) : _expression(expression)
 {
@@ -16,6 +20,9 @@ ExpressionImplementation::ExpressionImplementation(std::string expression) : _ex
 
 		_initialized = true;
 	}
+
+	_parameters["pi"] = M_PI;
+	_parameters["e"] = M_E;
 
 	CompileExpression();
 
@@ -28,18 +35,18 @@ ExpressionImplementation::ExpressionImplementation(std::string expression) : _ex
 void ExpressionImplementation::CompileExpression() const
 {
 	auto lexemes = ParseExpression();
-	auto tokens = ConvertToPrefixNotation(lexemes);
+	_tokens = ConvertToPrefixNotation(lexemes);
 	std::stack<ValueType*> stack;
 
 	//We need addresses in one memory block, which CPU will can load in cache
 	//It's will improve performance.
 	//We allocate memory for vector, because otherwise it will reallocate memory and addresses will be invalid
 	//We count variables (we store it in memory) and operations (we store operation result in memory too)
-	_memory.reserve(std::count_if(tokens.begin(), tokens.end(), [](Token token) { auto type = token.GetType(); return type == Token::Constant || type == Token::Operation; }));
+	_memory.reserve(std::count_if(_tokens.begin(), _tokens.end(), [](Token token) { auto type = token.GetType(); return type == Token::Constant || type == Token::Operation; }));
 
 	_compiledExpressionBytes.emplace_back(0x50); //push eax
 
-	for(auto it = tokens.begin(); it != tokens.end(); ++it)
+	for(auto it = _tokens.begin(); it != _tokens.end(); ++it)
 	{
 		const Token &token = *it;
 
@@ -70,8 +77,7 @@ void ExpressionImplementation::CompileExpression() const
 									 {
 										 case OperatorBase::Unary:
 										 {
-																	 auto operand = stack.top();
-																	 stack.pop();
+																	 auto operand = pop(stack);
 
 																	 const UnaryOperatorBase &unaryOp = static_cast<const UnaryOperatorBase&>(operation);
 
@@ -81,11 +87,9 @@ void ExpressionImplementation::CompileExpression() const
 
 										 case OperatorBase::Binary:
 										 {
-																	  auto operand2 = stack.top();
-																	  stack.pop();
+																	  auto operand2 = pop(stack);
 
-																	  auto operand1 = stack.top();
-																	  stack.pop();
+																	  auto operand1 = pop(stack);
 
 																	  const BinaryOperatorBase &binaryOp = static_cast<const BinaryOperatorBase&>(operation);
 
@@ -115,5 +119,5 @@ ValueType ExpressionImplementation::Execute() const
 
 	code();
 
-	return _memory.size() != 0? _memory.back() : _parameters.begin()->second;
+	return _memory.size() != 0? _memory.back() : _parameters[_tokens.back().GetVariableName()];
 }

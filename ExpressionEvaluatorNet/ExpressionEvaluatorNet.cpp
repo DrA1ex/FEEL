@@ -6,7 +6,18 @@ ExpressionEvaluatorNet::ExpressionEvaluator::ExpressionEvaluator(String^ express
 {
 	std::string mathExpression = msclr::interop::marshal_as<std::string>(expression);
 
-	_instance = new Expression(mathExpression);
+	try
+	{
+		_instance = new Expression(mathExpression);
+	}
+	catch(std::exception e)
+	{
+		throw gcnew Exception(msclr::interop::marshal_as<String^>(e.what()));
+	}
+	catch(...)
+	{
+		throw gcnew Exception("Unexpected exception");
+	}
 }
 
 ExpressionEvaluatorNet::ExpressionEvaluator::~ExpressionEvaluator()
@@ -24,6 +35,10 @@ double ExpressionEvaluatorNet::ExpressionEvaluator::Execute()
 	catch(std::exception e)
 	{
 		throw gcnew Exception(msclr::interop::marshal_as<String^>(e.what()));
+	}
+	catch(...)
+	{
+		throw gcnew Exception("Unexpected exception");
 	}
 }
 
@@ -58,4 +73,21 @@ array<String^>^ ExpressionEvaluatorNet::ExpressionEvaluator::Variables()
 	}
 
 	return result->ToArray();
+}
+
+double ExpressionEvaluatorNet::ExpressionEvaluator::GetVariableValue(String^ name)
+{
+	Parameters &params = _instance->GetParameters();
+
+
+	std::string paramName = msclr::interop::marshal_as<std::string>(name);
+
+	if(params.find(paramName) != params.end())
+	{
+		return params[paramName];
+	}
+	else
+	{
+		throw gcnew Exception(String::Format("Variable {0} not found!", name));
+	}
 }

@@ -67,12 +67,16 @@ public:
 	Assembler &Div(double* operand2);
 
 	//FDIV ST(0), ST(1)
-	//Divide st(0) on st(1) and store result into st(0)
+	//Divide st(1) on st(0) and store result into st(0)
 	Assembler &Div();
 
 	//FDIVR ST(0), ST(1)
-	//Divide st(1) on st(0) and store result into st(0)
+	//Divide st(0) on st(1) and store result into st(0)
 	Assembler &DivR();
+	
+	//FPREM
+	//Compute partial remainder of st(0) divided at st(1) and store result into st(0)
+	Assembler &Mod();
 
 	//FMUL QWORD PTR DS:[operand2]
 	//Multiply st(1) and operand2 and store result into st(0)
@@ -97,6 +101,10 @@ public:
 	//FABS
 	//Compute modulus of st(0) and store result into st(0)
 	Assembler &Abs();
+
+	//FSQRT
+	//Compute square root of st(0) and store result into st(0)
+	Assembler &Sqrt();
 
 	//Returns ExpressionBytes of command sequence passed into Assembler
 	inline ExpressionBytes GetData() const
