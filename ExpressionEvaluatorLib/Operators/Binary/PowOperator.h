@@ -32,7 +32,7 @@ public:
 
 	virtual OperatorPriority Priority() const
 	{
-		return OperatorBase::Normal;
+		return OperatorBase::Higher;
 	}
 
 };
