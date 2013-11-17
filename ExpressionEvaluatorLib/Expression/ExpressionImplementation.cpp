@@ -113,5 +113,5 @@ ValueType ExpressionImplementation::Execute() const
 
 	code();
 
-	return _memory.back();
+	return _memory.size() != 0? _memory.back() : _parameters.begin()->second;
 }
