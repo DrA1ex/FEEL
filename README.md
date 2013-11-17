@@ -25,8 +25,18 @@ Start value:    -1.6
 End value:      1.6
 Steps:          10000000 (10m)
 
+.NET Benchmark results:
 Library name            Avg. time
 FEEL (this library):    3255ms
 Ciloci.Flee:            3818ms (~20% slower)
-NCalc:                  27402ms (741% slower)
+NCalc:                  27402ms (~741% slower)
+
+C# compiled code:       3336ms (~2$ slower)
+
+C++ Benchmark results:
+Library name            Avg. time
+FEEL (this library):    2194ms
+ExprEval:               3253ms (~48% slower)
+
+C++ compiled code:      1120ms (~50% faster)
 ```
