@@ -17,7 +17,14 @@ ExpressionEvaluatorNet::ExpressionEvaluator::~ExpressionEvaluator()
 
 double ExpressionEvaluatorNet::ExpressionEvaluator::Execute()
 {
-	return _instance->Execute();
+	try
+	{
+		return _instance->Execute();
+	}
+	catch(std::exception e)
+	{
+		throw gcnew Exception(msclr::interop::marshal_as<String^>(e.what()));
+	}
 }
 
 void ExpressionEvaluatorNet::ExpressionEvaluator::SetVariableValue(String^ name, double value)

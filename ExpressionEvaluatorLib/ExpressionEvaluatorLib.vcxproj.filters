@@ -104,6 +104,9 @@
     <ClInclude Include="ExpressionEvaluatorLib.h">
       <Filter>Headers</Filter>
     </ClInclude>
+    <ClInclude Include="Helpers.h">
+      <Filter>Headers\Common</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ExpressionEvaluatorLib.cpp">

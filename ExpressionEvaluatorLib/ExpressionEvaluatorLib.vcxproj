@@ -85,6 +85,7 @@
     <ClInclude Include="Expression\ExpressionImplementation.h" />
     <ClInclude Include="Expression\Internal\Lexeme.h" />
     <ClInclude Include="Expression\Internal\Token.h" />
+    <ClInclude Include="Helpers.h" />
     <ClInclude Include="Operators\Binary\AddOperator.h" />
     <ClInclude Include="Operators\Binary\Base\BinaryOperatorBase.h" />
     <ClInclude Include="Operators\Binary\DivOperator.h" />

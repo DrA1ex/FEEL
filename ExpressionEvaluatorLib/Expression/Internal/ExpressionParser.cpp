@@ -5,6 +5,7 @@
 #include <stack>
 #include <string>
 #include <algorithm>
+#include "..\..\Helpers.h"
 
 
 enum SymbolType { NumberPart, Character, Symbol, Bracket, Divider };
@@ -87,7 +88,7 @@ void ProcessLexeme(std::vector<Lexeme> &lexemes, SymbolType type, const std::str
 						  }
 						  else
 						  {
-							  throw std::runtime_error("Unknown lexeme");
+							  throw std::runtime_error(MakeString() << "Unknown lexeme: " << data << " with type " << type);
 						  }
 		}
 			break;
@@ -149,7 +150,7 @@ Token ExpressionImplementation::ConstructFromLexeme(Lexeme lexeme) const
 								  if(operation != _operators.end())
 									  return Token::Create(*operation->second.get());
 
-								  throw std::runtime_error("Unknown operation");
+								  throw std::runtime_error(MakeString() << "Unknown operation: " << lexeme.LexemeData);
 		}
 
 		case Lexeme::Variable:
@@ -163,7 +164,7 @@ Token ExpressionImplementation::ConstructFromLexeme(Lexeme lexeme) const
 		}
 	}
 
-	throw std::logic_error("Unsupported lexeme type");
+	throw std::logic_error(MakeString() << "Unsupported lexeme type: " << lexeme.Type << " with data: " << lexeme.LexemeData);
 }
 
 
@@ -171,7 +172,7 @@ template<class T>
 T pop(std::stack<T> &stack)
 {
 	if(stack.empty())
-		throw std::runtime_error("Syntactic error");
+		throw std::runtime_error("Syntactic error.");
 
 	T value = stack.top();
 	stack.pop();
@@ -186,7 +187,7 @@ const OperatorBase* ExpressionImplementation::GetOperationFromLexeme(Lexeme lexe
 		return _operators[lexeme.LexemeData].get();
 	}
 
-	throw std::runtime_error("Unknown operation");
+	throw std::runtime_error(MakeString() << "Unknown operation: " << lexeme.LexemeData);
 }
 
 std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(std::vector<Lexeme> lexemes) const
@@ -257,7 +258,7 @@ std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(std::vector
 				break;
 
 			default:
-				throw new std::logic_error("Unknown lexeme type");
+				throw new std::logic_error(MakeString() << "Unknown lexeme type: " << currentLexeme.Type << " with data: " << currentLexeme.LexemeData);
 		}
 	}
 
