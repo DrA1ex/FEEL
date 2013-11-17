@@ -12,6 +12,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorNet", "E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionCalculatorDemo", "ExpressionCalculatorDemo\ExpressionCalculatorDemo.csproj", "{13EF459C-41E5-49E3-87D5-56D27371B3DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionEvaluator.Test", "ExpressionEvaluator.Test\ExpressionEvaluator.Test.csproj", "{0467BAE4-867B-470D-BC97-9AD78059F18E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -52,6 +54,16 @@ Global
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Win32.ActiveCfg = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
