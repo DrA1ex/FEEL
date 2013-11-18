@@ -35,6 +35,16 @@ namespace ExpressionEvaluator.Test
         }
 
         [TestMethod]
+        public void NegTest2()
+        {
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("-(sqrt(x)) - 5 - -7");
+            const double x = 124;
+            expr.SetVariableValue("x", x);
+
+            Assert.AreEqual(-(Math.Sqrt(x)) - 5 - -7, expr.Execute(), Delta);
+        }
+
+        [TestMethod]
         public void CeilTest()
         {
             var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("ceil (7.7) + ceil(-8.9) - ceil (7.1) ");
