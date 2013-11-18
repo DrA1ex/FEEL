@@ -103,6 +103,26 @@ void ProcessLexeme(std::vector<Lexeme> &lexemes, SymbolType type, const std::str
 		{
 						if(data == "(")
 						{
+							if(lexemes.size() >= 1)
+							{
+								auto lastLexeme = lexemes.back();
+
+								Lexeme preLastLexeme(Lexeme::None);
+								if(lexemes.size() >= 2)
+									preLastLexeme = *(lexemes.end() - 2);
+
+								//if last lexeme is sign and previous lexeme is operation\bracket, 
+								//so we can say, that this sign relates with open bracket
+								if(lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
+									&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
+								{
+									if(lastLexeme.LexemeData == "-")
+										lexemes.back().LexemeData = "neg";
+									else
+										lexemes.pop_back();
+								}
+							}
+
 							lexemes.emplace_back(Lexeme(Lexeme::OpenBracket));
 						}
 						else
