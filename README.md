@@ -3,6 +3,7 @@ Fast Expression Evaluator Library (c++, .net)
 
 With this library you can evaluate math expressions fast and easily.
 See Demo project for examples.
+For advanced examples see [Curves Demo](https://github.com/DrA1ex/FEEL.CurveDemo)
 
 Features:
 ---
