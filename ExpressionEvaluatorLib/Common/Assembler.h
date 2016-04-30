@@ -3,6 +3,18 @@
 
 #include "../Typedefs.h"
 
+enum class GeneralAsmRegisters : size_t
+{
+	EAX = 0,
+	ECX,
+	EDX,
+	EBX,
+	ESP,
+	EBP,
+	ESI,
+	EDI
+};
+
 class Assembler
 {
 	ExpressionBytes _data;
@@ -20,7 +32,16 @@ class Assembler
 		}
 	}
 
+	template<typename Arg1,typename... Data>
+	void Write(Arg1 arg1, Data... args)
+	{
+		Write(arg1);
+		Write(args...);
+	}
+
 public:
+	void WriteTo(ExpressionBytes& dst);
+
 	//FLD QWORD PTR DS:[value]
 	//Push value to FPU stack
 	Assembler &Load(double *value);
@@ -105,6 +126,30 @@ public:
 	//FSQRT
 	//Compute square root of st(0) and store result into st(0)
 	Assembler &Sqrt();
+
+	//RET
+	//Return from proc
+	Assembler &Ret();
+
+	//PUSH <REGISTER>
+	//Push register to stack)
+	Assembler &PushRegister(GeneralAsmRegisters reg);
+
+	//POP <REGISTER>
+	//Pop register from stack (register number should be in [0-7])
+	Assembler &PopRegister(GeneralAsmRegisters reg);
+
+	//FINIT
+	//Init FPU
+	Assembler &InitFPU();
+
+	//FSAVE
+	//Save FPU to [ESP]
+	Assembler &SaveFPU();
+
+	//FRSTORE 
+	//Load FPU from [ESP]
+	Assembler &RestoreFPU();
 
 	//Returns ExpressionBytes of command sequence passed into Assembler
 	inline ExpressionBytes GetData() const

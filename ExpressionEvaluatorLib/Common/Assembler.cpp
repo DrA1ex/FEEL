@@ -1,6 +1,12 @@
 #include "Assembler.h"
 
 
+void Assembler::WriteTo(ExpressionBytes& dst)
+{
+	const auto &src = GetData();
+	dst.insert(dst.end(), src.cbegin(), src.cend());
+}
+
 Assembler & Assembler::Load(double *value)
 {
 	Write<Byte>(0xDD);
@@ -194,8 +200,7 @@ Assembler & Assembler::Abs()
 
 Assembler & Assembler::Pop()
 {
-	Write<Byte>(0xDD);
-	Write<Byte>(0xD8);
+	Write(Byte(0xDD), Byte(0xD8));
 
 	return *this;
 }
@@ -213,8 +218,61 @@ Assembler & Assembler::Free(Byte registerNumber)
 
 Assembler & Assembler::Sqrt()
 {
-	Write<Byte>(0xD9);
-	Write<Byte>(0xFA);
+	Write(Byte(0xD9), Byte(0xFA));
+
+	return *this;
+}
+
+Assembler& Assembler::Ret()
+{
+	Write<Byte>(0xC3);
+
+	return *this;
+}
+
+Assembler& Assembler::PushRegister(GeneralAsmRegisters reg)
+{
+	size_t index = static_cast<size_t>(reg);
+	if (index > 7)
+		throw std::logic_error("Register must be in 0-7");
+
+	Write<Byte>(0x50 + index);
+
+	return *this;
+}
+
+Assembler& Assembler::PopRegister(GeneralAsmRegisters reg)
+{
+	size_t index = static_cast<size_t>(reg);
+	if (index > 7)
+		throw std::logic_error("Register must be in 0-7");
+
+	Write<Byte>(0x58 + index);
+
+	return *this;
+}
+
+Assembler& Assembler::InitFPU()
+{
+	Write(Byte(0x9B), Byte(0xDB), Byte(0xE3));
+
+	return *this;
+}
+
+Assembler& Assembler::SaveFPU()
+{
+	this->AllocateStack(110);
+
+	Write(Byte(0x9B), Byte(0xDD), Byte(0x34), Byte(0x24));
+
+	return *this;
+}
+
+Assembler& Assembler::RestoreFPU()
+{
+	this->FreeStack(110);
+
+	Write(Byte(0xDD), Byte(0x24), Byte(0x24));
 
 	return *this;
 }

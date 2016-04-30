@@ -13,7 +13,7 @@
 #include "../Operators/Binary/Base/BinaryOperatorBase.h"
 #include "../Helpers.h"
 
-ExpressionImplementation::ExpressionImplementation(const std::string &expression) : _expression(expression)
+ExpressionImplementation::ExpressionImplementation(const std::string& expression) : _expression(expression)
 {
 	if (!_initialized)
 	{
@@ -51,8 +51,11 @@ void ExpressionImplementation::CompileExpression() const
 		                              auto type = token.GetType();
 		                              return type == Token::Constant || type == Token::Operation;
 	                              }));
-
-	_compiledExpressionBytes.emplace_back(0x50); //push eax
+	Assembler()
+		.PushRegister(GeneralAsmRegisters::EAX)
+		.InitFPU()
+		.SaveFPU()
+		.WriteTo(_compiledExpressionBytes);
 
 	for (auto it = _tokens.begin(); it != _tokens.end(); ++it)
 	{
@@ -114,8 +117,11 @@ void ExpressionImplementation::CompileExpression() const
 	if (stack.size() != 1)
 		throw std::runtime_error("Stack disbalanced! Expression is wrong.");
 
-	_compiledExpressionBytes.emplace_back(0x58); //pop eax
-	_compiledExpressionBytes.emplace_back(0xC3); //ret
+	Assembler()
+		.RestoreFPU()
+		.PopRegister(GeneralAsmRegisters::EAX)
+		.Ret()
+		.WriteTo(_compiledExpressionBytes);
 }
 
 ValueType ExpressionImplementation::Execute() const
