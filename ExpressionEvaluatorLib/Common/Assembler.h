@@ -1,7 +1,7 @@
 #ifndef Assembler_h__
 #define Assembler_h__
 
-#include "..\Typedefs.h"
+#include "../Typedefs.h"
 
 class Assembler
 {

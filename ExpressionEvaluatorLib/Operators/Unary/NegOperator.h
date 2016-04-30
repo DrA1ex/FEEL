@@ -1,7 +1,7 @@
 #ifndef NegOperator_h__
 #define NegOperator_h__
 
-#include "Base\UnaryOperatorBase.h"
+#include "Base/UnaryOperatorBase.h"
 
 
 class NegOperator : public UnaryOperatorBase

@@ -1,7 +1,7 @@
 #ifndef MulOperator_h__
 #define MulOperator_h__
 
-#include "Base\BinaryOperatorBase.h"
+#include "Base/BinaryOperatorBase.h"
 
 class MulOperator : public BinaryOperatorBase
 {

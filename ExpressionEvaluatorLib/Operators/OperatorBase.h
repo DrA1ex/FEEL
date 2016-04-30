@@ -1,6 +1,6 @@
 #ifndef OperatorBase_h__
 #define OperatorBase_h__
-#include "..\Common\Assembler.h"
+#include "../Common/Assembler.h"
 
 #include <memory>
 #include <map>

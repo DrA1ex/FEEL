@@ -5,10 +5,10 @@
 #include <mutex>
 #include <atomic>
 
-#include "..\Typedefs.h"
-#include "..\Operators\OperatorBase.h"
-#include "Internal\Token.h"
-#include "Internal\Lexeme.h"
+#include "../Typedefs.h"
+#include "../Operators/OperatorBase.h"
+#include "Internal/Token.h"
+#include "Internal/Lexeme.h"
 
 class ExpressionImplementation
 {

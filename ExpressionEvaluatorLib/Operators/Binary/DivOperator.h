@@ -1,7 +1,7 @@
 #ifndef DivOperator_h__
 #define DivOperator_h__
 
-#include "Base\BinaryOperatorBase.h"
+#include "Base/BinaryOperatorBase.h"
 
 
 class DivOperator : public BinaryOperatorBase

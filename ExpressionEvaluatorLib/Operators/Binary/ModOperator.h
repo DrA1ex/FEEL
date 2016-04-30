@@ -1,7 +1,7 @@
 #ifndef ModOperator_h__
 #define ModOperator_h__
 
-#include "Base\BinaryOperatorBase.h"
+#include "Base/BinaryOperatorBase.h"
 
 class ModOperator : public BinaryOperatorBase
 {

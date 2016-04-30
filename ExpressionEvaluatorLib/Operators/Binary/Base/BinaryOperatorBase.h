@@ -1,8 +1,8 @@
 #ifndef BinaryOperatorBase_h__
 #define BinaryOperatorBase_h__
 
-#include "..\..\..\Typedefs.h"
-#include "..\..\OperatorBase.h"
+#include "../../../Typedefs.h"
+#include "../../OperatorBase.h"
 
 class BinaryOperatorBase : public OperatorBase
 {

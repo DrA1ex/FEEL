@@ -1,10 +1,10 @@
-#include "..\ExpressionImplementation.h"
-#include "..\..\Operators\Unary\Base\UnaryOperatorBase.h"
+#include "../ExpressionImplementation.h"
+#include "../../Operators/Unary/Base/UnaryOperatorBase.h"
 #include "Lexeme.h"
 
 #include <stack>
 #include <string>
-#include "..\..\Helpers.h"
+#include "../../Helpers.h"
 
 
 enum SymbolType

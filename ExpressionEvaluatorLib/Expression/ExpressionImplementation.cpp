@@ -8,10 +8,10 @@
 #include <math.h>
 
 #include "ExpressionImplementation.h"
-#include "..\Typedefs.h"
-#include "..\Operators\Unary\Base\UnaryOperatorBase.h"
-#include "..\Operators\Binary\Base\BinaryOperatorBase.h"
-#include "..\Helpers.h"
+#include "../Typedefs.h"
+#include "../Operators/Unary/Base/UnaryOperatorBase.h"
+#include "../Operators/Binary/Base/BinaryOperatorBase.h"
+#include "../Helpers.h"
 
 ExpressionImplementation::ExpressionImplementation(const std::string &expression) : _expression(expression)
 {

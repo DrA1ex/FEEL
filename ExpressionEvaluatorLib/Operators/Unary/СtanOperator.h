@@ -1,7 +1,7 @@
 #ifndef ÑtanOperator_h__
 #define ÑtanOperator_h__
 
-#include "Base\UnaryOperatorBase.h"
+#include "Base/UnaryOperatorBase.h"
 
 
 class CtanOperator : public UnaryOperatorBase

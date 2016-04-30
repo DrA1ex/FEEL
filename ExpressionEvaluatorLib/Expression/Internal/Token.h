@@ -1,8 +1,8 @@
 #ifndef Token_h__
 #define Token_h__
 
-#include "..\..\Typedefs.h"
-#include "..\..\Operators\OperatorBase.h"
+#include "../../Typedefs.h"
+#include "../../Operators/OperatorBase.h"
 
 class Token
 {

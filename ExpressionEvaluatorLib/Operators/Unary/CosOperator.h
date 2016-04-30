@@ -1,7 +1,7 @@
 #ifndef CosOperator_h__
 #define CosOperator_h__
 
-#include "Base\UnaryOperatorBase.h"
+#include "Base/UnaryOperatorBase.h"
 
 
 class CosOperator : public UnaryOperatorBase

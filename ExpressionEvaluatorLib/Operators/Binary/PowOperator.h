@@ -1,7 +1,7 @@
 #ifndef PowOperator_h__
 #define PowOperator_h__
 
-#include "Base\BinaryOperatorBase.h"
+#include "Base/BinaryOperatorBase.h"
 #include <math.h>
 
 class PowOperator : public BinaryOperatorBase

@@ -1,8 +1,8 @@
 #ifndef UnaryOperatorBase_h__
 #define UnaryOperatorBase_h__
 
-#include "..\..\OperatorBase.h"
-#include "..\..\..\Typedefs.h"
+#include "../../OperatorBase.h"
+#include "../../../Typedefs.h"
 
 class UnaryOperatorBase : public OperatorBase
 {
