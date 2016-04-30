@@ -80,6 +80,8 @@ namespace ExpressionEvaluator.Test
                 expr.SetVariableValue(GenericExpressionArgument, x);
                 sum += expr.Execute();
                 testSum += GenericExpressionTest(x);
+
+                Assert.IsFalse(double.IsNaN(sum), $"Whoops, sum is NaN. At step {x} ({expr.GetVariableValue(GenericExpressionArgument)}), (sum should be {testSum})");
             }
 
             Assert.AreEqual(testSum, sum, Delta);

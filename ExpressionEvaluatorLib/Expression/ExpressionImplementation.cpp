@@ -13,7 +13,7 @@
 #include "..\Operators\Binary\Base\BinaryOperatorBase.h"
 #include "..\Helpers.h"
 
-ExpressionImplementation::ExpressionImplementation(std::string expression) : _expression(expression)
+ExpressionImplementation::ExpressionImplementation(const std::string &expression) : _expression(expression)
 {
 	if (!_initialized)
 	{

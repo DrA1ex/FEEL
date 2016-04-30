@@ -82,5 +82,32 @@ namespace ExpressionEvaluator.Test
 
             Assert.Fail("Should throw exception");
         }
+
+        [TestMethod]
+        public void TestUnknownVariableError()
+        {
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("abs a * b");
+            expr.SetVariableValue("a", 1);
+
+            var throwed = false;
+
+            try
+            {
+                expr.SetVariableValue("c", 2);
+            }
+            catch(Exception)
+            {
+                //ok
+                throwed = true;
+            }
+
+            expr.SetVariableValue("b", 2);
+            expr.Execute();
+
+            if(!throwed)
+            {
+                Assert.Fail("Should throw exception");
+            }
+        }
     }
 }

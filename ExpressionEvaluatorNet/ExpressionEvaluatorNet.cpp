@@ -44,19 +44,14 @@ double ExpressionEvaluatorNet::ExpressionEvaluator::Execute()
 
 void ExpressionEvaluatorNet::ExpressionEvaluator::SetVariableValue(String^ name, double value)
 {
-	Parameters &params = _instance->GetParameters();
-
-
 	std::string paramName = msclr::interop::marshal_as<std::string>(name);
-	auto param = params.find(paramName);
-
-	if(param != params.end())
+	try
 	{
-		param->second = value;
-	}
-	else
+		_instance->SetParameter(paramName, value);
+	} 
+	catch(std::exception e)
 	{
-		throw gcnew Exception(String::Format("Variable {0} not found!", name));
+		throw gcnew Exception(msclr::interop::marshal_as<String^>(e.what()));
 	}
 }
 
@@ -64,8 +59,8 @@ array<String^>^ ExpressionEvaluatorNet::ExpressionEvaluator::Variables()
 {
 	List<String^>^ result = gcnew List<String^>;
 
-	Parameters &params = _instance->GetParameters();
-	for(auto it = params.begin(); it != params.end(); ++it)
+	const Parameters & params = _instance->GetParameters();
+	for(auto it = params.cbegin(); it != params.cend(); ++it)
 	{
 		auto key = it->first;
 
@@ -78,14 +73,13 @@ array<String^>^ ExpressionEvaluatorNet::ExpressionEvaluator::Variables()
 
 double ExpressionEvaluatorNet::ExpressionEvaluator::GetVariableValue(String^ name)
 {
-	Parameters &params = _instance->GetParameters();
-
+	const Parameters &params = _instance->GetParameters();
 
 	std::string paramName = msclr::interop::marshal_as<std::string>(name);
 
-	if(params.find(paramName) != params.end())
+	if(params.find(paramName) != params.cend())
 	{
-		return params[paramName];
+		return params.at(paramName);
 	}
 	else
 	{

@@ -22,7 +22,10 @@ public:
 	~Expression();
 
 	//Returns reference to Parameters dictionary
-	Parameters &GetParameters();
+	const Parameters & GetParameters() const;
+
+	void SetParameter(const char * name, ValueType value);
+	void SetParameter(const std::string & name, ValueType value);
 
 	//Executes expression and return result
 	ValueType Execute() const;

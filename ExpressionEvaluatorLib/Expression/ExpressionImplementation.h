@@ -14,7 +14,7 @@ class ExpressionImplementation
 {
 public:
 
-	ExpressionImplementation(std::string expression);
+	ExpressionImplementation(const std::string &expression);
 
 	mutable ExpressionBytes _compiledExpressionBytes;
 	mutable std::vector<ValueType> _memory;
@@ -29,9 +29,9 @@ public:
 	static void Init();
 	static void AddNewOperation(OperatorBase *operation);
 
-	Token ConstructFromLexeme(Lexeme Lexeme) const;
-	const OperatorBase* GetOperationFromLexeme(Lexeme lexeme) const;
-	std::vector<Token> ConvertToPrefixNotation(std::vector<Lexeme> lexemes) const;
+	Token ConstructFromLexeme(const Lexeme&  Lexeme) const;
+	static const OperatorBase* GetOperationFromLexeme(const Lexeme& lexeme);
+	std::vector<Token> ConvertToPrefixNotation(const std::vector<Lexeme> &lexemes) const;
 
 	std::vector<Lexeme> ParseExpression() const;
 	void CompileExpression() const;
