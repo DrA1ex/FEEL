@@ -205,9 +205,10 @@ Token ExpressionImplementation::ConstructFromLexeme(const Lexeme& lexeme) const
 
 const OperatorBase* ExpressionImplementation::GetOperationFromLexeme(const Lexeme& lexeme)
 {
-	if (_operators.find(lexeme.LexemeData) != _operators.end())
+	auto op = _operators.find(lexeme.LexemeData);
+	if (op != _operators.end())
 	{
-		return _operators[lexeme.LexemeData].get();
+		return op->second.get();
 	}
 
 	throw std::runtime_error(MakeString() << "Unknown operation: " << lexeme.LexemeData);

@@ -24,7 +24,7 @@ void ExpressionImplementation::AddNewOperation(OperatorBase *operation)
 	if(_operators.find(operation->OperatorName()) != _operators.end())
 		throw std::logic_error("Operator already added in operator collection");
 
-	_operators[operation->OperatorName()] = std::shared_ptr<OperatorBase>(operation);
+	_operators[operation->OperatorName()] = std::unique_ptr<OperatorBase>(operation);
 }
 
 void ExpressionImplementation::Init()

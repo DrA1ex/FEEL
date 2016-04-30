@@ -3,7 +3,7 @@
 #include "../Common/Assembler.h"
 
 #include <memory>
-#include <map>
+#include <unordered_map>
 
 
 class OperatorBase
@@ -29,6 +29,6 @@ public:
 	virtual bool IsLeftAssociative() const { return Priority() == Highest; }
 };
 
-typedef std::map<std::string, std::shared_ptr<OperatorBase>> OperatorsDictonary;
+typedef std::unordered_map<std::string, std::unique_ptr<OperatorBase>> OperatorsDictonary;
 
 #endif // OperatorBase_h__
