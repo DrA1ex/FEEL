@@ -7,7 +7,7 @@
 class PowOperator : public BinaryOperatorBase
 {
 public:
-	ExpressionBytes GetBytes(ValueType *operand1, ValueType *operand2, ValueType *result) const
+	ExpressionBytes GetBytes(ValueType *operand1, ValueType *operand2, ValueType *result) const override
 	{
 		typedef double(*doublePow)(double, double);
 		doublePow powAddress = &pow;
@@ -25,12 +25,12 @@ public:
 		return assembler.GetData();
 	}
 
-	virtual const char * OperatorName() const
+	const char * OperatorName() const override
 	{
 		return "^";
 	}
 
-	virtual OperatorPriority Priority() const
+	OperatorPriority Priority() const override
 	{
 		return OperatorBase::Higher;
 	}

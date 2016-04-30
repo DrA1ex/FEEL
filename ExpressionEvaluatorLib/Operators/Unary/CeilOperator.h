@@ -7,7 +7,7 @@
 class CeilOperator : public UnaryOperatorBase
 {
 public:
-	ExpressionBytes GetBytes(ValueType *operand, ValueType *result) const
+	ExpressionBytes GetBytes(ValueType *operand, ValueType *result) const override
 	{
 		typedef double(*doubleCeil)(double);
 		doubleCeil ceilAddress = &ceil;
@@ -23,12 +23,12 @@ public:
 		return assembler.GetData();
 	}
 
-	virtual const char * OperatorName() const
+	const char * OperatorName() const override
 	{
 		return "ceil";
 	}
 
-	virtual OperatorPriority Priority() const
+	OperatorPriority Priority() const override
 	{
 		return OperatorBase::Highest;
 	}

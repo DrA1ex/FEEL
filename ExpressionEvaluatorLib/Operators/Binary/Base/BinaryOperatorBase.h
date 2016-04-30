@@ -12,7 +12,7 @@ public:
 
 	virtual ExpressionBytes GetBytes(ValueType *operand1, ValueType *operand2, ValueType *result) const = 0;
 
-	virtual OperatorType Type() const
+	OperatorType Type() const override
 	{
 		return OperatorType::Binary;
 	}
