@@ -2,6 +2,8 @@
 #define ExpressionImplementation_h__
 
 #include <vector>
+#include <mutex>
+#include <atomic>
 
 #include "..\Typedefs.h"
 #include "..\Operators\OperatorBase.h"
@@ -22,9 +24,10 @@ public:
 
 	static OperatorsDictonary _operators;
 
-	static bool _initialized;
-	void Init();
-	void AddNewOperation(OperatorBase *operation);
+	static std::atomic<bool> _initialized;
+	static std::once_flag _initFlag;
+	static void Init();
+	static void AddNewOperation(OperatorBase *operation);
 
 	Token ConstructFromLexeme(Lexeme Lexeme) const;
 	const OperatorBase* GetOperationFromLexeme(Lexeme lexeme) const;

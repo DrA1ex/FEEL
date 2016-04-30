@@ -13,14 +13,14 @@
 #include "..\Operators\Binary\Base\BinaryOperatorBase.h"
 #include "..\Helpers.h"
 
-static std::once_flag ExpressionImplementationOperationImplementation;
-
 ExpressionImplementation::ExpressionImplementation(std::string expression) : _expression(expression)
 {
 	if (!_initialized)
 	{
-		Init();
-
+		std::call_once(_initFlag, []
+		               {
+			               Init();
+		               });
 		_initialized = true;
 	}
 
@@ -28,7 +28,6 @@ ExpressionImplementation::ExpressionImplementation(std::string expression) : _ex
 	_parameters["e"] = M_E;
 
 	CompileExpression();
-
 
 	auto handle = GetCurrentProcess();
 	DWORD oldProtect;

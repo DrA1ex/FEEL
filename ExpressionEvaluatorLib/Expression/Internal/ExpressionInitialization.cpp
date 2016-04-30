@@ -16,7 +16,8 @@
 #include "..\..\Operators\Unary\SqrtOperator.h"
 
 OperatorsDictonary ExpressionImplementation::_operators;
-bool ExpressionImplementation::_initialized = false;
+std::atomic<bool> ExpressionImplementation::_initialized = false;
+std::once_flag ExpressionImplementation::_initFlag;
 
 void ExpressionImplementation::AddNewOperation(OperatorBase *operation)
 {
