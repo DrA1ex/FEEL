@@ -145,5 +145,37 @@ namespace ExpressionEvaluator.Test
 
             Assert.IsTrue(threads.Distinct().Count() > 1, "Test was executed in 1 thread. Result isn't relaible");
         }
+
+        [TestMethod]
+        public void TestVariables()
+        {
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("cos(a)+b+sin(c+d^x)^abs(y^z)");
+
+            var variables = new[]
+            {
+                "a", "b", "c", "d", "x", "y", "z", "e", "pi"
+            };
+
+            var exprVariables = expr.Variables();
+
+            var missingVariables = variables.Where(v => !exprVariables.Contains(v)).ToArray();
+            var extraVariables = exprVariables.Where(v => !variables.Contains(v)).ToArray();
+
+            var errors = new[]
+            {
+                missingVariables.Any()
+                    ? $"Expression miss variables: \"{String.Join(", ", missingVariables)}\""
+                    : null,
+                extraVariables.Any()
+                    ? $"Expression has extra variables: \"{String.Join(", ", extraVariables)}\""
+                    : null
+            }.Where(e => e != null).ToArray();
+
+
+            if(errors.Any())
+            {
+                Assert.Fail(String.Join(Environment.NewLine, errors));
+            }
+        }
     }
 }

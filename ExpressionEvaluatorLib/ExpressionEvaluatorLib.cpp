@@ -26,7 +26,7 @@ void Expression::SetParameter(const std::string& name, ValueType value)
 	} 
 	else
 	{
-		throw new std::invalid_argument("Unknown parameter");
+		throw std::invalid_argument("Unknown parameter");
 	}
 }
 
