@@ -17,7 +17,7 @@ namespace ExpressionEvaluator.Test
         }
 
         [TestMethod]
-        public void ExtendedEspressionParseTest()
+        public void ExtendedExpressionParseTest()
         {
             var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("( abs( floor x )%2 )*( ( x^2 )/100 ) " +
                                                                       "+ ( abs( floor( x+1 ) )%2 )*( sqrt( abs( x )" +
@@ -28,7 +28,7 @@ namespace ExpressionEvaluator.Test
         }
 
         [TestMethod]
-        public void ExtendedEspressionParseTest2()
+        public void ExtendedExpressionParseTest2()
         {
             var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("( abs( x )%2 )*( ( x^2 )/100 ) " +
                                                                       "+ ( abs( x+1 )%2 )*( sqrt( abs( x )" +
@@ -63,7 +63,6 @@ namespace ExpressionEvaluator.Test
             var exprTest = new Func<double, double>(x => (Math.Abs(Math.Floor(x)) % 2) * ((Math.Pow(x, 2)) / 100)
                                                          + Math.Abs(Math.Floor(x + 1) % 2) * (Math.Sqrt(Math.Abs(x) * (100 - Math.Abs(x))) + 100) + 10);
 
-            expr.SetVariableValue("x", -0.6);
             const double step = 0.01;
             double sum = 0;
             double testSum = 0;

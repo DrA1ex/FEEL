@@ -48,10 +48,11 @@ void ExpressionEvaluatorNet::ExpressionEvaluator::SetVariableValue(String^ name,
 
 
 	std::string paramName = msclr::interop::marshal_as<std::string>(name);
+	auto param = params.find(paramName);
 
-	if(params.find(paramName) != params.end())
+	if(param != params.end())
 	{
-		params[paramName] = value;
+		param->second = value;
 	}
 	else
 	{

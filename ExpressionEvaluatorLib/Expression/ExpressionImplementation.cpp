@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <mutex>
 #include <stack>
 
 #include <Windows.h>
@@ -12,9 +13,11 @@
 #include "..\Operators\Binary\Base\BinaryOperatorBase.h"
 #include "..\Helpers.h"
 
+static std::once_flag ExpressionImplementationOperationImplementation;
+
 ExpressionImplementation::ExpressionImplementation(std::string expression) : _expression(expression)
 {
-	if(!_initialized)
+	if (!_initialized)
 	{
 		Init();
 
@@ -42,71 +45,73 @@ void ExpressionImplementation::CompileExpression() const
 	//It's will improve performance.
 	//We allocate memory for vector, because otherwise it will reallocate memory and addresses will be invalid
 	//We count variables (we store it in memory) and operations (we store operation result in memory too)
-	_memory.reserve(std::count_if(_tokens.begin(), _tokens.end(), [](Token token) { auto type = token.GetType(); return type == Token::Constant || type == Token::Operation; }));
+	_memory.reserve(std::count_if(_tokens.begin(), _tokens.end(),
+	                              [](Token token)
+	                              {
+		                              auto type = token.GetType();
+		                              return type == Token::Constant || type == Token::Operation;
+	                              }));
 
 	_compiledExpressionBytes.emplace_back(0x50); //push eax
 
-	for(auto it = _tokens.begin(); it != _tokens.end(); ++it)
+	for (auto it = _tokens.begin(); it != _tokens.end(); ++it)
 	{
-		const Token &token = *it;
+		const Token& token = *it;
 
-		switch(token.GetType())
+		switch (token.GetType())
 		{
-			case Token::Constant:
+		case Token::Constant:
 			{
-									_memory.emplace_back(token.GetConstant());
-									stack.emplace(&_memory.back());
+				_memory.emplace_back(token.GetConstant());
+				stack.emplace(&_memory.back());
 			}
-				break;
+			break;
 
-			case Token::Variable:
+		case Token::Variable:
 			{
-									ValueType *paramPtr = const_cast<ValueType*>(&_parameters.at(token.GetVariableName()));
-									stack.emplace(paramPtr);
+				ValueType* paramPtr = const_cast<ValueType*>(&_parameters.at(token.GetVariableName()));
+				stack.emplace(paramPtr);
 			}
-				break;
+			break;
 
-			case Token::Operation:
+		case Token::Operation:
 			{
-									 _memory.emplace_back(double());
-									 ValueType &resultRef = _memory.back();
-									 const OperatorBase &operation = token.GetOperation();
-									 ExpressionBytes operationBytes;
+				_memory.emplace_back(double());
+				ValueType& resultRef = _memory.back();
+				const OperatorBase& operation = token.GetOperation();
+				ExpressionBytes operationBytes;
 
-									 switch(token.GetOperation().Type())
-									 {
-										 case OperatorBase::Unary:
-										 {
-																	 auto operand = pop(stack);
+				switch (token.GetOperation().Type())
+				{
+				case OperatorBase::Unary:
+					{
+						auto operand = pop(stack);
+						const UnaryOperatorBase& unaryOp = static_cast<const UnaryOperatorBase&>(operation);
 
-																	 const UnaryOperatorBase &unaryOp = static_cast<const UnaryOperatorBase&>(operation);
+						operationBytes = unaryOp.GetBytes(operand, &resultRef);
+					}
+					break;
 
-																	 operationBytes = unaryOp.GetBytes(operand, &resultRef);
-										 }
-											 break;
+				case OperatorBase::Binary:
+					{
+						auto operand2 = pop(stack);
+						auto operand1 = pop(stack);
+						const BinaryOperatorBase& binaryOp = static_cast<const BinaryOperatorBase&>(operation);
 
-										 case OperatorBase::Binary:
-										 {
-																	  auto operand2 = pop(stack);
+						operationBytes = binaryOp.GetBytes(operand1, operand2, &resultRef);
+					}
+					break;
+				}
 
-																	  auto operand1 = pop(stack);
-
-																	  const BinaryOperatorBase &binaryOp = static_cast<const BinaryOperatorBase&>(operation);
-
-																	  operationBytes = binaryOp.GetBytes(operand1, operand2, &resultRef);
-										 }
-											 break;
-									 }
-
-									 _compiledExpressionBytes.insert(_compiledExpressionBytes.end(), operationBytes.begin(), operationBytes.end());
-									 stack.emplace(&resultRef);
+				_compiledExpressionBytes.insert(_compiledExpressionBytes.end(), operationBytes.begin(), operationBytes.end());
+				stack.emplace(&resultRef);
 			}
-				break;
+			break;
 		}
 	}
 
 	//stack should store only result pointer at end
-	if(stack.size() != 1)
+	if (stack.size() != 1)
 		throw std::runtime_error("Stack disbalanced! Expression is wrong.");
 
 	_compiledExpressionBytes.emplace_back(0x58); //pop eax
@@ -115,9 +120,9 @@ void ExpressionImplementation::CompileExpression() const
 
 ValueType ExpressionImplementation::Execute() const
 {
-	auto code = (void(*)())_compiledExpressionBytes.data();
+	auto code = reinterpret_cast<void(*)()>(_compiledExpressionBytes.data());
 
 	code();
 
-	return _memory.size() != 0? _memory.back() : _parameters[_tokens.back().GetVariableName()];
+	return _memory.size() != 0 ? _memory.back() : _parameters[_tokens.back().GetVariableName()];
 }
