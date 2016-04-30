@@ -213,7 +213,7 @@ const OperatorBase* ExpressionImplementation::GetOperationFromLexeme(const Lexem
 	throw std::runtime_error(MakeString() << "Unknown operation: " << lexeme.LexemeData);
 }
 
-std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(const std::vector<Lexeme>& lexemes) const
+void ExpressionImplementation::PrepareExpression(const std::vector<Lexeme>& lexemes)
 {
 	std::vector<Token> result;
 	std::stack<Lexeme> stack;
@@ -296,5 +296,5 @@ std::vector<Token> ExpressionImplementation::ConvertToPrefixNotation(const std::
 		result.push_back(ConstructFromLexeme(currentLexeme));
 	}
 
-	return result;
+	_tokens = result;
 }

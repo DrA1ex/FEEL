@@ -18,8 +18,8 @@ public:
 
 	mutable ExpressionBytes _compiledExpressionBytes;
 	mutable std::vector<ValueType> _memory;
-	mutable Parameters _parameters;
-	mutable std::vector<Token> _tokens;
+	Parameters _parameters;
+	std::vector<Token> _tokens;
 	std::string _expression;
 
 	static OperatorsDictonary _operators;
@@ -31,7 +31,7 @@ public:
 
 	Token ConstructFromLexeme(const Lexeme&  Lexeme) const;
 	static const OperatorBase* GetOperationFromLexeme(const Lexeme& lexeme);
-	std::vector<Token> ConvertToPrefixNotation(const std::vector<Lexeme> &lexemes) const;
+	void PrepareExpression(const std::vector<Lexeme> &lexemes);
 
 	std::vector<Lexeme> ParseExpression() const;
 	void CompileExpression() const;

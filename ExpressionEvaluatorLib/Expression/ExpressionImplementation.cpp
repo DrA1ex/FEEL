@@ -27,6 +27,9 @@ ExpressionImplementation::ExpressionImplementation(const std::string &expression
 	_parameters["pi"] = M_PI;
 	_parameters["e"] = M_E;
 
+	auto lexemes = ParseExpression();
+	PrepareExpression(lexemes);
+
 	CompileExpression();
 
 	auto handle = GetCurrentProcess();
@@ -36,14 +39,12 @@ ExpressionImplementation::ExpressionImplementation(const std::string &expression
 
 void ExpressionImplementation::CompileExpression() const
 {
-	auto lexemes = ParseExpression();
-	_tokens = ConvertToPrefixNotation(lexemes);
 	std::stack<ValueType*> stack;
 
 	//We need addresses in one memory block, which CPU will can load in cache
 	//It's will improve performance.
-	//We allocate memory for vector, because otherwise it will reallocate memory and addresses will be invalid
-	//We count variables (we store it in memory) and operations (we store operation result in memory too)
+	//We allocate memory for vector, because otherwise it may reallocate memory and addresses will be invalid
+	//We count constants (we store them in memory) and operations (we store operation result in memory too)
 	_memory.reserve(std::count_if(_tokens.begin(), _tokens.end(),
 	                              [](Token token)
 	                              {
@@ -123,5 +124,5 @@ ValueType ExpressionImplementation::Execute() const
 
 	code();
 
-	return _memory.size() != 0 ? _memory.back() : _parameters[_tokens.back().GetVariableName()];
+	return _memory.size() != 0 ? _memory.back() : _parameters.at(_tokens.back().GetVariableName());
 }

@@ -2,13 +2,13 @@
 #define Typedefs_h__
 
 #include <vector>
-#include <map>
 #include <string>
+#include <unordered_map>
 
 typedef double ValueType;
 typedef unsigned char Byte;
 
 typedef std::vector<Byte> ExpressionBytes;
-typedef std::map<std::string, ValueType> Parameters;
+typedef std::unordered_map<std::string, ValueType> Parameters;
 
 #endif // Typedefs_h__
