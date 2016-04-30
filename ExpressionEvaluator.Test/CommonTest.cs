@@ -1,4 +1,9 @@
 ﻿using System;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ExpressionEvaluator.Test
@@ -7,6 +12,17 @@ namespace ExpressionEvaluator.Test
     public class CommonTest
     {
         private const double Delta = 0.0000000001;
+
+        private static readonly string GenericExpression = "( abs( floor x )%2 )*( ( x^2 )/100 ) " +
+                                                           "+ abs( floor( x+1 )%2 ) " +
+                                                           "* ( sqrt( abs( x )" +
+                                                           "*( 100 - abs( x ) ) ) + 100 ) + 10";
+
+        private static readonly string GenericExpressionArgument = "x";
+
+        private static readonly Func<double, double> GenericExpressionTest
+            = x => Math.Abs(Math.Floor(x)) % 2 * (Math.Pow(x, 2) / 100)
+                   + Math.Abs(Math.Floor(x + 1) % 2) * (Math.Sqrt(Math.Abs(x) * (100 - Math.Abs(x))) + 100) + 10;
 
         [TestMethod]
         public void ExpressionParseTest()
@@ -55,25 +71,44 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void LongComputeTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("( abs( floor x )%2 )*( ( x^2 )/100 ) " +
-                                                                      "+ abs( floor( x+1 )%2 ) " +
-                                                                      "* ( sqrt( abs( x )" +
-                                                                      "*( 100 - abs( x ) ) ) + 100 ) + 10");
-
-            var exprTest = new Func<double, double>(x => (Math.Abs(Math.Floor(x)) % 2) * ((Math.Pow(x, 2)) / 100)
-                                                         + Math.Abs(Math.Floor(x + 1) % 2) * (Math.Sqrt(Math.Abs(x) * (100 - Math.Abs(x))) + 100) + 10);
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
 
             const double step = 0.01;
             double sum = 0;
             double testSum = 0;
-            for (double x = -100; x < 100; x += step)
+            for(double x = -100; x < 100; x += step)
             {
-                expr.SetVariableValue("x", x);
+                expr.SetVariableValue(GenericExpressionArgument, x);
                 sum += expr.Execute();
-                testSum += exprTest(x);
+                testSum += GenericExpressionTest(x);
             }
 
             Assert.AreEqual(testSum, sum, Delta);
+        }
+
+        [TestMethod]
+        public async Task ParallelWorkTest()
+        {
+            var testRange = Enumerable.Range(-1000, 2000).ToArray();
+            const double step = 0.01;
+
+            var threads = new ConcurrentBag<int>();
+
+            var tasks = testRange.Select(i => Task.Run(() =>
+            {
+                threads.Add(Thread.CurrentThread.ManagedThreadId);
+
+                var expression = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
+                expression.SetVariableValue(GenericExpressionArgument, i* step);
+
+                return expression.Execute();
+            })).ToArray();
+
+            var expressionResult = (await Task.WhenAll(tasks)).Sum();
+            var testResult = testRange.Select(i => GenericExpressionTest(i * step)).Sum();
+
+            Assert.AreEqual(testResult, expressionResult, Delta);
+            Assert.IsTrue(threads.Distinct().Count() > 1, "Test was executed in 1 thread. Result isn't relaible");
         }
     }
 }
