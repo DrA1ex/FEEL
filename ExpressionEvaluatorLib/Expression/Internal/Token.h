@@ -19,7 +19,7 @@ private:
 		ValueType _constant;
 	};
 
-	Token() {}
+	Token(): _type() {}
 
 public:
 	static Token Create(const OperatorBase &operation);

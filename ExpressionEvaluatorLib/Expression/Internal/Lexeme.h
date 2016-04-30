@@ -1,8 +1,6 @@
 #ifndef Lexeme_h__
 #define Lexeme_h__
 
-#include <string>
-
 struct Lexeme
 {
 	enum LexemeType
@@ -20,7 +18,7 @@ struct Lexeme
 	std::string LexemeData;
 	LexemeType Type;
 
-	Lexeme(LexemeType type, std::string value) : Type(type), LexemeData(value)
+	Lexeme(LexemeType type, std::string value) : LexemeData(value), Type(type)
 	{}
 
 	Lexeme(LexemeType type) : Type(type)
