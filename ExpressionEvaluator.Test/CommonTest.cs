@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -87,7 +86,7 @@ namespace ExpressionEvaluator.Test
         }
 
         [TestMethod]
-        public async Task ParallelWorkTest()
+        public async Task TestParallelShorUsage()
         {
             var testRange = Enumerable.Range(-1000, 2000).ToArray();
             const double step = 0.01;
@@ -108,6 +107,40 @@ namespace ExpressionEvaluator.Test
             var testResult = testRange.Select(i => GenericExpressionTest(i * step)).Sum();
 
             Assert.AreEqual(testResult, expressionResult, Delta);
+            Assert.IsTrue(threads.Distinct().Count() > 1, "Test was executed in 1 thread. Result isn't relaible");
+        }
+
+        [TestMethod]
+        public async Task TestParallelLongUsage()
+        {
+            var tasksRange = Enumerable.Range(0, 50).ToArray();
+            const double step = 0.01;
+            var testRange = Enumerable.Range(0, (int)(200 / step)).ToArray();
+
+            var getValueFromIndex = new Func<int, double>(i => -100 + i * step);
+
+            var threads = new ConcurrentBag<int>();
+            var tasks = tasksRange.Select(i => Task.Run(() =>
+            {
+                threads.Add(Thread.CurrentThread.ManagedThreadId);
+
+                var expression = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
+                return testRange.Select(rangeIndex =>
+                {
+                    expression.SetVariableValue(GenericExpressionArgument, getValueFromIndex(rangeIndex));
+                    return expression.Execute();
+                }).Sum();
+            }));
+
+            var expressionResults = await Task.WhenAll(tasks);
+            var testResult = testRange.Select(i => GenericExpressionTest(getValueFromIndex(i))).Sum();
+
+            var wrongResults = expressionResults.Where(v => Math.Abs(v - testResult) > Delta).ToArray();
+            if(wrongResults.Any())
+            {
+                Assert.Fail($"Test failed with {wrongResults.Length} wrong results: {String.Join(", ",wrongResults.Distinct())}");
+            }
+
             Assert.IsTrue(threads.Distinct().Count() > 1, "Test was executed in 1 thread. Result isn't relaible");
         }
     }

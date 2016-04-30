@@ -6,16 +6,17 @@ namespace ExpressionEvaluator.Test
     [TestClass]
     public class ErrorHandlingTest
     {
-
-        static void TestNan(double value)
+        // ReSharper disable once UnusedParameter.Local
+        private static void TestNan(double value)
         {
-            if (!double.IsNaN(value))
+            if(!double.IsNaN(value))
                 Assert.Fail("Result should be NaN, but returned {0} instead", value);
         }
 
-        static void TestInf(double value)
+        // ReSharper disable once UnusedParameter.Local
+        private static void TestInf(double value)
         {
-            if (!double.IsInfinity(value))
+            if(!double.IsInfinity(value))
                 Assert.Fail("Result should be Inf, but returned {0} instead", value);
         }
 
@@ -48,11 +49,12 @@ namespace ExpressionEvaluator.Test
         {
             try
             {
+                // ReSharper disable once UnusedVariable
                 var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("(16*)15^2)");
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                if (!e.Message.Contains("Syntactic error"))
+                if(!e.Message.Contains("Syntactic error"))
                     Assert.Fail("Bad exception: {0}", e.Message);
 
                 throw;
@@ -67,11 +69,12 @@ namespace ExpressionEvaluator.Test
         {
             try
             {
+                // ReSharper disable once UnusedVariable
                 var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("abs e * sin");
             }
-            catch (Exception e)
+            catch(Exception e)
             {
-                if (!e.Message.Contains("Syntactic error"))
+                if(!e.Message.Contains("Syntactic error"))
                     Assert.Fail("Bad exception: {0}", e.Message);
 
                 throw;

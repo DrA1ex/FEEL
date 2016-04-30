@@ -37,7 +37,7 @@ namespace ExpressionEvaluator.Test
         {
             var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1024/2 /4 /8");
 
-            Assert.AreEqual(1024 / 2 / 4 / 8, expr.Execute(), Delta);
+            Assert.AreEqual(1024.0 / 2 / 4 / 8, expr.Execute(), Delta);
         }
 
         [TestMethod]
