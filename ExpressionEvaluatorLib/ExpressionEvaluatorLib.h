@@ -18,13 +18,12 @@ class EXPRESSIONEVALUATORLIB_API Expression
 public:
 
 	//Compiles expression from the "expression"
-	explicit Expression(std::string expression);
+	explicit Expression(const std::string& expression);
 	~Expression();
 
 	//Returns reference to Parameters dictionary
 	const Parameters & GetParameters() const;
 
-	void SetParameter(const char * name, ValueType value);
 	void SetParameter(const std::string & name, ValueType value);
 
 	//Executes expression and return result

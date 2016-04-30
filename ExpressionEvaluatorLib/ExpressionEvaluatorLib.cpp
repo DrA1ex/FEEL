@@ -2,7 +2,7 @@
 #include "Typedefs.h"
 #include "Expression\ExpressionImplementation.h"
 
-Expression::Expression(std::string expression) : _impl(new ExpressionImplementation(expression))
+Expression::Expression(const std::string& expression) : _impl(new ExpressionImplementation(expression))
 {
 }
 
