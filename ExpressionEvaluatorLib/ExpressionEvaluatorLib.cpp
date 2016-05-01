@@ -11,7 +11,7 @@ Expression::~Expression()
 	delete _impl;
 }
 
-const Parameters & Expression::GetParameters() const
+const Parameters & Expression::GetParameters()
 {
 	return _impl->_parameters;
 }
@@ -22,7 +22,7 @@ void Expression::SetParameter(const std::string& name, ValueType value)
 	auto param = _impl->_parameters.find(name);
 	if (param != _impl->_parameters.end()) 
 	{
-		param->second = value;
+		*param->second = value;
 	} 
 	else
 	{

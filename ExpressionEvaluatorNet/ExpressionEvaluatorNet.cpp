@@ -79,7 +79,7 @@ double ExpressionEvaluatorNet::ExpressionEvaluator::GetVariableValue(String^ nam
 
 	if(params.find(paramName) != params.cend())
 	{
-		return params.at(paramName);
+		return *params.at(paramName);
 	}
 	else
 	{

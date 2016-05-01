@@ -13,6 +13,9 @@
 #include "../Operators/Binary/Base/BinaryOperatorBase.h"
 #include "../Helpers.h"
 
+static ValueType __pi = M_PI;
+static ValueType __e = M_E;
+
 ExpressionImplementation::ExpressionImplementation(const std::string& expression) : _expression(expression)
 {
 	if (!_initialized)
@@ -24,8 +27,8 @@ ExpressionImplementation::ExpressionImplementation(const std::string& expression
 		_initialized = true;
 	}
 
-	_parameters["pi"] = M_PI;
-	_parameters["e"] = M_E;
+	_parameters["__pi"] = nullptr;
+	_parameters["__e"] = nullptr;
 
 	auto lexemes = ParseExpression();
 	PrepareExpression(lexemes);
@@ -51,6 +54,14 @@ void ExpressionImplementation::CompileExpression() const
 		                              auto type = token.GetType();
 		                              return type == Token::Constant || type == Token::Operation;
 	                              }));
+
+	_parametersMemory.reserve(_parameters.size());
+
+	_parametersMemory.emplace_back(__pi);
+	_parameters["__pi"] = &_parametersMemory.back();
+	_parametersMemory.emplace_back(__e);
+	_parameters["__e"] = &_parametersMemory.back();
+
 	Assembler()
 		.PushRegister(GeneralAsmRegisters::EAX)
 		.InitFPU()
@@ -71,14 +82,20 @@ void ExpressionImplementation::CompileExpression() const
 
 		case Token::Variable:
 			{
-				ValueType* paramPtr = const_cast<ValueType*>(&_parameters.at(token.GetVariableName()));
+				ValueType* &paramPtr = _parameters[token.GetVariableName()];
+				if(paramPtr == nullptr)
+				{
+					_parametersMemory.emplace_back(NAN);
+					paramPtr = &_parametersMemory.back();
+				}
+
 				stack.emplace(paramPtr);
 			}
 			break;
 
 		case Token::Operation:
 			{
-				_memory.emplace_back(double());
+				_memory.emplace_back(NAN);
 				ValueType& resultRef = _memory.back();
 				const OperatorBase& operation = token.GetOperation();
 				ExpressionBytes operationBytes;
@@ -128,5 +145,5 @@ ValueType ExpressionImplementation::Execute() const
 
 	code();
 
-	return _memory.size() != 0 ? _memory.back() : _parameters.at(_tokens.back().GetVariableName());
+	return _memory.size() != 0 ? _memory.back() : *_parameters.at(_tokens.back().GetVariableName());
 }

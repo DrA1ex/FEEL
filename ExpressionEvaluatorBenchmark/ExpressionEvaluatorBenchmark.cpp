@@ -37,17 +37,20 @@ int main()
 {
 	Expression expr("(cos(x)^0.5*cos(200*x)+abs(x)^0.5-0.7)*(4-x^2)^0.01");
 
-	const double from = -1.6;
-	const double to = 1.6;
+	const double from = -1.5;
+	const double to = 1.5;
 	const size_t steps = 1000000;
 
 	const size_t bench_repeats = 15;
 
 	double exprTime = avgTime([&]
 	{
-		sumInInterval(from, to, steps, [&expr](double value)
+		const Parameters &parameters = expr.GetParameters();
+
+		ValueType *xValue = parameters.at("x");
+		sumInInterval(from, to, steps, [&expr, xValue](double value)
 		{
-			expr.SetParameter("x", value);
+			*xValue = value;
 			return expr.Execute();
 		});
 	}, bench_repeats);

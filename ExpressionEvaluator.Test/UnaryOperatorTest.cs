@@ -63,7 +63,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void CosTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("cos pi + cos(0) - cos -17 ");
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("cos __pi + cos(0) - cos -17 ");
 
             Assert.AreEqual(Math.Cos(Math.PI) + Math.Cos(0.0) - Math.Cos(-17.0), expr.Execute(), Delta);
         }
@@ -71,7 +71,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void SinTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("sin pi + sin(0) - sin -17 ");
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("sin __pi + sin(0) - sin -17 ");
 
             Assert.AreEqual(Math.Sin(Math.PI) + Math.Sin(0.0) - Math.Sin(-17.0), expr.Execute(), Delta);
         }
@@ -79,7 +79,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void TanTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("tan (pi) + tan(8) - tan 0");
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("tan (__pi) + tan(8) - tan 0");
 
             Assert.AreEqual(Math.Tan(Math.PI) + Math.Tan(8) - Math.Tan(0), expr.Execute(), Delta);
         }
@@ -87,7 +87,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void CtanTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("ctan (pi/2) + ctan(6) - ctan (-pi/2) ");
+            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("ctan (__pi/2) + ctan(6) - ctan (-__pi/2) ");
 
             Assert.AreEqual(1 / Math.Tan(Math.PI / 2) + 1 / Math.Tan(6) - 1 / Math.Tan(-Math.PI / 2), expr.Execute(), Delta);
         }

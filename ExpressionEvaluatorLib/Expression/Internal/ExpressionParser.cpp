@@ -22,7 +22,7 @@ SymbolType DetectSymbolType(char ch)
 	{
 		return NumberPart;
 	}
-	else if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z')
+	else if (ch >= 'a' && ch <= 'z' || ch >= 'A' && ch <= 'Z' || ch == '_')
 	{
 		return Character;
 	}
@@ -231,7 +231,7 @@ void ExpressionImplementation::PrepareExpression(const std::vector<Lexeme>& lexe
 
 		case Lexeme::Variable:
 			if (_parameters.find(currentLexeme.LexemeData) == _parameters.end())
-				_parameters[currentLexeme.LexemeData] = NAN;
+				_parameters[currentLexeme.LexemeData] = nullptr;
 			result.emplace_back(ConstructFromLexeme(currentLexeme));
 			break;
 

@@ -6,8 +6,8 @@ namespace ExpressionEvaluatorNetBenchmark
 {
     public class FeelVsManaged
     {
-        private const double From = -1.6;
-        private const double To = 1.6;
+        private const double From = -1.5;
+        private const double To = 1.5;
         private const uint Steps = 1000000;
 
         private double Sum(Func<double, double> func)

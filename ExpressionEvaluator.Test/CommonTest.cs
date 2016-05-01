@@ -154,7 +154,7 @@ namespace ExpressionEvaluator.Test
 
             var variables = new[]
             {
-                "a", "b", "c", "d", "x", "y", "z", "e", "pi"
+                "a", "b", "c", "d", "x", "y", "z", "__e", "__pi"
             };
 
             var exprVariables = expr.Variables();

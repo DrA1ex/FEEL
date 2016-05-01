@@ -18,7 +18,8 @@ public:
 
 	mutable ExpressionBytes _compiledExpressionBytes;
 	mutable std::vector<ValueType> _memory;
-	Parameters _parameters;
+	mutable std::vector<ValueType> _parametersMemory;
+	mutable Parameters _parameters;
 	std::vector<Token> _tokens;
 	std::string _expression;
 
