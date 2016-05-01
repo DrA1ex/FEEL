@@ -42,6 +42,12 @@
     <Filter Include="Sources\Common">
       <UniqueIdentifier>{9e41917b-ee3a-41cf-93e0-9e226319dd77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Operators\Ternary">
+      <UniqueIdentifier>{35cc7dda-c979-4ed6-98da-f90ca141b4d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Headers\Operators\Ternary\Base">
+      <UniqueIdentifier>{ccdc04ce-ac16-43f9-9d1e-ba94b8f05d60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression\ExpressionImplementation.h">
@@ -118,6 +124,27 @@
     </ClInclude>
     <ClInclude Include="Operators\Unary\СtanOperator.h">
       <Filter>Headers\Operators\Unary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Ternary\Base\TernaryOperatorBase.h">
+      <Filter>Headers\Operators\Ternary\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Ternary\ChoiceOperator.h">
+      <Filter>Headers\Operators\Ternary</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\EqualOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\GreaterOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\GreaterOrEqualOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\LessOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\LessOrEqualOperator.h">
+      <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -11,11 +11,32 @@ void Assembler::WriteTo(ExpressionBytes& dst) const
 	dst.insert(dst.end(), src.cbegin(), src.cend());
 }
 
+Assembler &Assembler::Write(const Assembler &a)
+{
+	a.WriteTo(_data);
+
+	return *this;
+}
+
 Assembler & Assembler::Load(double *value)
 {
 	Write<Byte>(0xDD);
 	Write<Byte>(0x05);
 	Write<double*>(value);
+
+	return *this;
+}
+
+Assembler& Assembler::LoadZero()
+{
+	Write(Byte(0xD9), Byte(0xEE));
+
+	return *this;
+}
+
+Assembler& Assembler::LoadOne()
+{
+	Write(Byte(0xD9), Byte(0xE8));
 
 	return *this;
 }
@@ -57,11 +78,15 @@ Assembler & Assembler::StoreToStack(uint32_t offset)
 
 Assembler & Assembler::Call(void *address)
 {
-	Write<Byte>(0xB8);
-	Write<void*>(address);
+	Mov(GeneralAsmRegisters::EAX, uint32_t(address));
+	Call(GeneralAsmRegisters::EAX);
 
-	Write<Byte>(0xFF);
-	Write<Byte>(0xD0);
+	return *this;
+}
+
+Assembler& Assembler::Call(GeneralAsmRegisters reg)
+{
+	Write(Byte(0xFF), Byte(0xD0 | Byte(reg)));
 
 	return *this;
 }
@@ -229,6 +254,29 @@ Assembler& Assembler::Mov(GeneralAsmRegisters dst, GeneralAsmRegisters src)
 	return *this;
 }
 
+Assembler& Assembler::Mov(GeneralAsmRegisters dst, uint32_t src)
+{
+	Byte dstN = static_cast<Byte>(dst);
+
+	Write(Byte(0xB8 | dstN), uint32_t(src));
+
+	return *this;
+}
+
+Assembler& Assembler::Mov(double* dst, GeneralAsmRegisters src)
+{
+	if (src == GeneralAsmRegisters::EAX) {
+		Write(Byte(0xA3), uint32_t(dst));
+	} 
+	else
+	{
+		Byte srcN = static_cast<Byte>(src);
+		Write(Byte(0x89), Byte(0x04 | srcN << 3), uint32_t(dst));
+	}
+
+	return *this;
+}
+
 Assembler& Assembler::And(GeneralAsmRegisters dst, uint32_t data)
 {
 	Byte dstN = static_cast<Byte>(dst);
@@ -306,6 +354,66 @@ Assembler& Assembler::RestoreFPU()
 	Write(Byte(0xDD), Byte(0x24), Byte(0x24));
 
 	return FreeStack(BYTES_FOR_FPU_SAVE_LOAD);
+}
+
+Assembler& Assembler::Compare(Byte registerNumber)
+{
+	if (registerNumber > 8)
+		throw std::logic_error("FPU register must be in 0-7");
+
+	Write<Byte>(0xDB);
+	Write<Byte>(0xF0 | registerNumber);
+
+	return *this;
+}
+
+Assembler& Assembler::Jmp(int8_t offset)
+{
+	Write(Byte(0xEB), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JE(int8_t offset)
+{
+	Write(Byte(0x74), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JNE(int8_t offset)
+{
+	Write(Byte(0x75), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JL(int8_t offset)
+{
+	Write(Byte(0x72), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JG(int8_t offset)
+{
+	Write(Byte(0x77), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JGE(int8_t offset)
+{
+	Write(Byte(0x73), offset);
+
+	return *this;
+}
+
+Assembler Assembler::JLE(int8_t offset)
+{
+	Write(Byte(0x76), offset);
+
+	return *this;
 }
 
 Assembler & Assembler::Mod()

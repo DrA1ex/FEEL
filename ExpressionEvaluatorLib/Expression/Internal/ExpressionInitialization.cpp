@@ -14,6 +14,12 @@
 #include "../../Operators/Unary/CeilOperator.h"
 #include "../../Operators/Unary/FloorOperator.h"
 #include "../../Operators/Unary/SqrtOperator.h"
+#include "../../Operators/Ternary/ChoiceOperator.h"
+#include "../../Operators/Binary/GreaterOrEqualOperator.h"
+#include "../../Operators/Binary/LessOrEqualOperator.h"
+#include "../../Operators/Binary/EqualOperator.h"
+#include "../../Operators/Binary/GreaterOperator.h"
+#include "../../Operators/Binary/LessOperator.h"
 
 OperatorsDictonary ExpressionImplementation::_operators;
 std::atomic<bool> ExpressionImplementation::_initialized = false;
@@ -51,4 +57,14 @@ void ExpressionImplementation::Init()
 	AddNewOperation(new FloorOperator());
 
 	AddNewOperation(new SqrtOperator());
+
+	AddNewOperation(new GreaterOrEqualOperator());
+	AddNewOperation(new LessOrEqualOperator());
+
+	AddNewOperation(new EqualOperator());
+	AddNewOperation(new GreaterOperator());
+	AddNewOperation(new LessOperator());
+
+	//Ternary operations
+	AddNewOperation(new ChoiceOperator());
 }

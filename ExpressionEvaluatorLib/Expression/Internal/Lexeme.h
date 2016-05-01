@@ -11,6 +11,7 @@ struct Lexeme
 
 		OpenBracket,
 		CloseBracket,
+		Comma,
 
 		None
 	};

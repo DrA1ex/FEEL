@@ -13,7 +13,7 @@ public:
 
 	enum OperatorType
 	{
-		Unary, Binary
+		Unary, Binary, Ternary
 	};
 
 	enum OperatorPriority

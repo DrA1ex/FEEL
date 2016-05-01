@@ -13,6 +13,7 @@ enum SymbolType
 	Character,
 	Symbol,
 	Bracket,
+	Comma,
 	Divider
 };
 
@@ -30,8 +31,14 @@ SymbolType DetectSymbolType(char ch)
 	{
 		return Bracket;
 	}
-	else if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r')
+	else if (ch == ',')
+	{
+		return Comma;
+	}
+	else if (ch == ' ' || ch == '\t' || ch == '\n' || ch == '\r' || ch == ',')
+	{
 		return Divider;
+	}
 
 	return Symbol;
 }
@@ -137,6 +144,10 @@ void ProcessLexeme(std::vector<Lexeme>& lexemes, SymbolType type, const std::str
 		}
 		break;
 
+	case Comma:
+		lexemes.emplace_back(Lexeme(Lexeme::Comma));
+		break;
+
 	case Divider:
 	default:
 		//Do nothing
@@ -157,7 +168,7 @@ std::vector<Lexeme> ExpressionImplementation::ParseExpression() const
 
 		currentSymbolType = DetectSymbolType(symb);
 
-		if (currentSymbolType != lastSymbType && lastSymbType != Divider || lastSymbType == Symbol || lastSymbType == Bracket)
+		if (currentSymbolType != lastSymbType && lastSymbType != Divider || lastSymbType == Bracket)
 		{
 			ProcessLexeme(lexemes, lastSymbType, accumulator);
 			accumulator.clear();
@@ -248,6 +259,20 @@ void ExpressionImplementation::PrepareExpression(const std::vector<Lexeme>& lexe
 
 				while ((tempLexeme = pop(stack)).Type != Lexeme::OpenBracket)
 					result.emplace_back(ConstructFromLexeme(tempLexeme));
+			}
+			break;
+
+		case Lexeme::Comma:
+			{
+				if (stack.empty())
+					throw std::runtime_error("Syntactic error. Unexpected comma");
+
+				Lexeme tempLexeme(Lexeme::None);
+
+				while ((tempLexeme = pop(stack)).Type != Lexeme::OpenBracket)
+					result.emplace_back(ConstructFromLexeme(tempLexeme));
+
+				stack.push(tempLexeme);
 			}
 			break;
 

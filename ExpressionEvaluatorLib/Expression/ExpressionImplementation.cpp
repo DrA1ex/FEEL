@@ -11,6 +11,7 @@
 #include "../Typedefs.h"
 #include "../Operators/Unary/Base/UnaryOperatorBase.h"
 #include "../Operators/Binary/Base/BinaryOperatorBase.h"
+#include "../Operators/Ternary/Base/TernaryOperatorBase.h"
 #include "../Helpers.h"
 
 static ValueType __pi = M_PI;
@@ -118,6 +119,17 @@ void ExpressionImplementation::CompileExpression() const
 						const BinaryOperatorBase& binaryOp = static_cast<const BinaryOperatorBase&>(operation);
 
 						operationBytes = binaryOp.GetBytes(operand1, operand2, &resultRef);
+					}
+					break;
+				case OperatorBase::Ternary:
+					{
+						auto operand3 = pop(stack);
+						auto operand2 = pop(stack);
+						auto operand1 = pop(stack);
+
+						const TernaryOperatorBase& ternaryOp = static_cast<const TernaryOperatorBase&>(operation);
+
+						operationBytes = ternaryOp.GetBytes(operand1, operand2, operand3, &resultRef);
 					}
 					break;
 				}

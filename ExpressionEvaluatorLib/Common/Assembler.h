@@ -41,10 +41,19 @@ class Assembler
 
 public:
 	void WriteTo(ExpressionBytes& dst) const;
+	Assembler &Write(const Assembler &a);
 
 	//FLD QWORD PTR DS:[value]
 	//Push value to FPU stack
 	Assembler &Load(double *value);
+
+	//FLDZ
+	//Push zero to FPU stack
+	Assembler &LoadZero();
+
+	//FLD1
+	//Push one to FPU stack
+	Assembler &LoadOne();
 
 	//FSTP QWORD PTR DS:[dest]
 	//Pop value from FPU stack to dest
@@ -63,17 +72,22 @@ public:
 	Assembler &Free(Byte registerNumber);
 
 	//MOV <DST>, <SRC>
-	//Moves data from SRC register to DST register
+	//Moves data from SRC to DST
 	Assembler &Mov(GeneralAsmRegisters dst, GeneralAsmRegisters src);
+	Assembler &Mov(GeneralAsmRegisters dst, uint32_t src);
+	Assembler &Mov(double *dst, GeneralAsmRegisters src);
 
 	//AND <DST>, <DATA>
 	//Apply AND to DST and DATA and store result into DST
 	Assembler &And(GeneralAsmRegisters dst, uint32_t data);
 
 	//MOV EAX, [address]
-	//call EAX
+	//CALL EAX
 	//Call function with address [address]
 	Assembler &Call(void *address);
+
+	//CALL <REGISTER>
+	Assembler &Call(GeneralAsmRegisters reg);
 
 	//SUB ESP, bytesCount
 	//Allocate memory in stack
@@ -159,10 +173,38 @@ public:
 	//Load FPU from [ESP]
 	Assembler &RestoreFPU();
 
+	//FCOMI
+	//Compare two values: st(0) and st(N)
+	Assembler &Compare(Byte registerNumber);
+
+	//JMP NEAR
+	Assembler &Jmp(int8_t offset);
+
+	//JMP NEAR if (not) Z (Zero flag)
+	Assembler JE(int8_t offset);
+	Assembler JNE(int8_t offset);
+
+	//JMP NEAR if C (Carry flag)
+	Assembler JL(int8_t offset);
+
+	//JMP NEAR if not C and not Z
+	Assembler JG(int8_t offset);
+
+	//JMP NEAR if greather or equal (flag Z or not C)
+	Assembler JGE(int8_t offset);
+
+	//JMP NEAR if less or equal (flag Z or C)
+	Assembler JLE(int8_t offset);
+
 	//Returns ExpressionBytes of command sequence passed into Assembler
 	inline ExpressionBytes GetData() const
 	{
 		return _data;
+	}
+
+	inline  size_t Size() const
+	{
+		return _data.size();
 	}
 };
 
