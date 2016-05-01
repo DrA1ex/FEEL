@@ -8,7 +8,7 @@
 typedef double ValueType;
 typedef unsigned char Byte;
 
-typedef std::vector<Byte> ExpressionBytes;
-typedef std::unordered_map<std::string, ValueType> Parameters;
+using ExpressionBytes = std::vector<Byte>;
+using Parameters = std::unordered_map<std::string, ValueType>;
 
 #endif // Typedefs_h__

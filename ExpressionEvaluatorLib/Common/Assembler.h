@@ -3,7 +3,7 @@
 
 #include "../Typedefs.h"
 
-enum class GeneralAsmRegisters : size_t
+enum class GeneralAsmRegisters : uint8_t
 {
 	EAX = 0,
 	ECX,
@@ -26,7 +26,7 @@ class Assembler
 
 		auto bytes = reinterpret_cast<const Byte *>(&data);
 
-		for(size_t i = 0; i < bytesCount; ++i)
+		for(uint32_t i = 0; i < bytesCount; ++i)
 		{
 			_data.emplace_back(bytes[i]);
 		}
@@ -40,7 +40,7 @@ class Assembler
 	}
 
 public:
-	void WriteTo(ExpressionBytes& dst);
+	void WriteTo(ExpressionBytes& dst) const;
 
 	//FLD QWORD PTR DS:[value]
 	//Push value to FPU stack
@@ -52,7 +52,7 @@ public:
 
 	//FSTP QWORD PTR SS:[ESP+offset]
 	//Pop value from FPU stack to [ESP+offset]
-	Assembler &StoreToStack(size_t offset);
+	Assembler &StoreToStack(uint32_t offset);
 
 	//FSTP ST
 	//Pop value from FPU stack
@@ -62,6 +62,14 @@ public:
 	//Mark ST register as free (register number should be in [1-7]
 	Assembler &Free(Byte registerNumber);
 
+	//MOV <DST>, <SRC>
+	//Moves data from SRC register to DST register
+	Assembler &Mov(GeneralAsmRegisters dst, GeneralAsmRegisters src);
+
+	//AND <DST>, <DATA>
+	//Apply AND to DST and DATA and store result into DST
+	Assembler &And(GeneralAsmRegisters dst, uint32_t data);
+
 	//MOV EAX, [address]
 	//call EAX
 	//Call function with address [address]
@@ -69,11 +77,11 @@ public:
 
 	//SUB ESP, bytesCount
 	//Allocate memory in stack
-	Assembler &AllocateStack(size_t bytesCount);
+	Assembler &AllocateStack(uint32_t bytesCount);
 
 	//ADD ESP, bytesCount
 	//Free memory in stack
-	Assembler &FreeStack(size_t bytesCount);
+	Assembler &FreeStack(uint32_t bytesCount);
 
 	//FADD QWORD PTR DS:[operand2]
 	//Add st(0) and operand2 and store result into st(0)

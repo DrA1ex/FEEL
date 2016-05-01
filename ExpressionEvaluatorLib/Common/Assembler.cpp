@@ -1,7 +1,11 @@
 #include "Assembler.h"
 
+//Opertation needs up to 108 bytes, also memory should be 16 bytes aligned
+static const uint8_t BYTES_FOR_FPU_SAVE_LOAD = 0x80;
 
-void Assembler::WriteTo(ExpressionBytes& dst)
+static const uint32_t MASK_16_BYTES_ALIGN = ~0x0F;
+
+void Assembler::WriteTo(ExpressionBytes& dst) const
 {
 	const auto &src = GetData();
 	dst.insert(dst.end(), src.cbegin(), src.cend());
@@ -25,7 +29,7 @@ Assembler & Assembler::Store(double *dest)
 	return *this;
 }
 
-Assembler & Assembler::StoreToStack(size_t offset)
+Assembler & Assembler::StoreToStack(uint32_t offset)
 {
 	if(offset == 0)
 	{
@@ -45,7 +49,7 @@ Assembler & Assembler::StoreToStack(size_t offset)
 		Write<Byte>(0xDD);
 		Write<Byte>(0x9C);
 		Write<Byte>(0xE4);
-		Write<size_t>(offset);
+		Write<uint32_t>(offset);
 	}
 
 	return *this;
@@ -62,7 +66,7 @@ Assembler & Assembler::Call(void *address)
 	return *this;
 }
 
-Assembler & Assembler::AllocateStack(size_t bytesCount)
+Assembler & Assembler::AllocateStack(uint32_t bytesCount)
 {
 	if(bytesCount == 0)
 		return *this;
@@ -77,13 +81,13 @@ Assembler & Assembler::AllocateStack(size_t bytesCount)
 	{
 		Write<Byte>(0x81);
 		Write<Byte>(0xEC);
-		Write<Byte>(bytesCount);
+		Write<uint32_t>(bytesCount);
 	}
 
 	return *this;
 }
 
-Assembler & Assembler::FreeStack(size_t bytesCount)
+Assembler & Assembler::FreeStack(uint32_t bytesCount)
 {
 	if(bytesCount == 0)
 		return *this;
@@ -98,7 +102,7 @@ Assembler & Assembler::FreeStack(size_t bytesCount)
 	{
 		Write<Byte>(0x81);
 		Write<Byte>(0xC4);
-		Write<Byte>(bytesCount);
+		Write<uint32_t>(bytesCount);
 	}
 
 	return *this;
@@ -216,6 +220,38 @@ Assembler & Assembler::Free(Byte registerNumber)
 	return *this;
 }
 
+Assembler& Assembler::Mov(GeneralAsmRegisters dst, GeneralAsmRegisters src)
+{
+	Byte dstN = Byte(dst);
+	Byte srcN = Byte(src);
+	Write(Byte(0x89), Byte(0xC0 | dstN | srcN << 3));
+
+	return *this;
+}
+
+Assembler& Assembler::And(GeneralAsmRegisters dst, uint32_t data)
+{
+	Byte dstN = static_cast<Byte>(dst);
+
+	if(data < 0x80)
+	{
+		Write(Byte(0x83), Byte(0xE0 | dstN), Byte(data));
+	} 
+	else
+	{
+		if (dst == GeneralAsmRegisters::EAX) 
+		{
+			Write(Byte(0x25), uint32_t(data));
+		} 
+		else
+		{
+			Write(Byte(0x81), Byte(0xE0 | dstN), data);
+		}
+	}
+
+	return *this;
+}
+
 Assembler & Assembler::Sqrt()
 {
 	Write(Byte(0xD9), Byte(0xFA));
@@ -232,9 +268,7 @@ Assembler& Assembler::Ret()
 
 Assembler& Assembler::PushRegister(GeneralAsmRegisters reg)
 {
-	size_t index = static_cast<size_t>(reg);
-	if (index > 7)
-		throw std::logic_error("Register must be in 0-7");
+	uint32_t index = static_cast<uint32_t>(reg);
 
 	Write<Byte>(0x50 + index);
 
@@ -243,9 +277,7 @@ Assembler& Assembler::PushRegister(GeneralAsmRegisters reg)
 
 Assembler& Assembler::PopRegister(GeneralAsmRegisters reg)
 {
-	size_t index = static_cast<size_t>(reg);
-	if (index > 7)
-		throw std::logic_error("Register must be in 0-7");
+	uint32_t index = static_cast<uint32_t>(reg);
 
 	Write<Byte>(0x58 + index);
 
@@ -261,7 +293,8 @@ Assembler& Assembler::InitFPU()
 
 Assembler& Assembler::SaveFPU()
 {
-	this->AllocateStack(110);
+	this->And(GeneralAsmRegisters::ESP, MASK_16_BYTES_ALIGN) //Make ESP 16 bytes aligned
+		.AllocateStack(BYTES_FOR_FPU_SAVE_LOAD);
 
 	Write(Byte(0x9B), Byte(0xDD), Byte(0x34), Byte(0x24));
 
@@ -270,11 +303,9 @@ Assembler& Assembler::SaveFPU()
 
 Assembler& Assembler::RestoreFPU()
 {
-	this->FreeStack(110);
-
 	Write(Byte(0xDD), Byte(0x24), Byte(0x24));
 
-	return *this;
+	return FreeStack(BYTES_FOR_FPU_SAVE_LOAD);
 }
 
 Assembler & Assembler::Mod()

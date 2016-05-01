@@ -10,7 +10,8 @@ namespace ExpressionEvaluator.Test
     [TestClass]
     public class CommonTest
     {
-        private const double Delta = 0.0000000001;
+        //.NET in Release build has less precision
+        private const double Delta = 0.000000001;
 
         private static readonly string GenericExpression = "( abs( floor x )%2 )*( ( x^2 )/100 ) " +
                                                            "+ abs( floor( x+1 )%2 ) " +

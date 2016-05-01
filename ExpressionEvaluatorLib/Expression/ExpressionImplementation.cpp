@@ -52,7 +52,9 @@ void ExpressionImplementation::CompileExpression() const
 		                              return type == Token::Constant || type == Token::Operation;
 	                              }));
 	Assembler()
+		.PushRegister(GeneralAsmRegisters::EBP)
 		.PushRegister(GeneralAsmRegisters::EAX)
+		.Mov(GeneralAsmRegisters::EBP, GeneralAsmRegisters::ESP)
 		.InitFPU()
 		.SaveFPU()
 		.WriteTo(_compiledExpressionBytes);
@@ -119,7 +121,9 @@ void ExpressionImplementation::CompileExpression() const
 
 	Assembler()
 		.RestoreFPU()
+		.Mov(GeneralAsmRegisters::ESP, GeneralAsmRegisters::EBP)
 		.PopRegister(GeneralAsmRegisters::EAX)
+		.PopRegister(GeneralAsmRegisters::EBP)
 		.Ret()
 		.WriteTo(_compiledExpressionBytes);
 }

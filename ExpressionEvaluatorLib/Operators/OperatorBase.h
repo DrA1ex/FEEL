@@ -29,6 +29,6 @@ public:
 	virtual bool IsLeftAssociative() const { return Priority() == Highest; }
 };
 
-typedef std::unordered_map<std::string, std::unique_ptr<OperatorBase>> OperatorsDictonary;
+using OperatorsDictonary = std::unordered_map<std::string, std::unique_ptr<OperatorBase>>;
 
 #endif // OperatorBase_h__
