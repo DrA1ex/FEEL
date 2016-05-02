@@ -1,9 +1,19 @@
 Fast Expression Evaluator Library (c++, .net)
 ====
 
+Yet another Expression Evaluator, but with **compilation** into **native code**
 With this library you can evaluate math expressions fast and easily.
-See Demo project for examples.
-For advanced examples see [Curves Demo](https://github.com/DrA1ex/FEEL.CurveDemo)
+
+Get Started:
+---
+    var expression = new ExpressionEvaluator("sqrt(r^2 - x^2)");
+
+    expression.SetVariableValue("r", 10);
+    expression.SetVariableValue("x", 5);
+
+    Console.WriteLine(expression.Execute());
+
+Also you can see [Tests](https://github.com/DrA1ex/FEEL/tree/master/ExpressionEvaluator.Test), simple demo [project](https://github.com/DrA1ex/FEEL/blob/master/ExpressionCalculatorDemo/Program.cs), [benchmark](https://github.com/DrA1ex/FEEL/blob/master/ExpressionEvaluatorNetBenchmark/Program.cs), or advanced example [Curves Demo](https://github.com/DrA1ex/FEEL.CurveDemo).
 
 Installation:
 ---
