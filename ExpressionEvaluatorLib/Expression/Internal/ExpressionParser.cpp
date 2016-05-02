@@ -62,7 +62,7 @@ void ProcessLexeme(std::vector<Lexeme>& lexemes, SymbolType type, const std::str
 				//if last lexeme is sign and previous lexeme is operation\bracket, 
 				//so we can say, that this sign relates with number
 				if (lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
-					&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
+					&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket || preLastLexeme.Type == Lexeme::Comma))
 				{
 					lexemes.pop_back();
 					if (lastLexeme.LexemeData == "-")
@@ -87,7 +87,7 @@ void ProcessLexeme(std::vector<Lexeme>& lexemes, SymbolType type, const std::str
 				//if last lexeme is sign and previous lexeme is operation\bracket, 
 				//so we can say, that this sign relates with variable\operation
 				if (lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
-					&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
+					&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket || preLastLexeme.Type == Lexeme::Comma))
 				{
 					if (lastLexeme.LexemeData == "-")
 						lexemes.back().LexemeData = "neg";
@@ -124,7 +124,7 @@ void ProcessLexeme(std::vector<Lexeme>& lexemes, SymbolType type, const std::str
 						preLastLexeme = *(lexemes.end() - 2);
 
 					//if last lexeme is sign and previous lexeme is operation\bracket, 
-					//so we can say, that this sign relates with open bracket
+					//so we can say, that this sign relates with variable\operation
 					if (lastLexeme.Type == Lexeme::Operation && (lastLexeme.LexemeData == "-" || lastLexeme.LexemeData == "+")
 						&& (lexemes.size() == 1 || preLastLexeme.Type == Lexeme::Operation || preLastLexeme.Type == Lexeme::OpenBracket))
 					{
