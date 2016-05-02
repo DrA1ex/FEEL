@@ -12,13 +12,13 @@ public:
 
 		Assembler falseAnswer;
 		falseAnswer.LoadZero()
-			.Jmp(trueAnswer.Size());
+			.Jmp(uint8_t(trueAnswer.Size()));
 
 		return Assembler()
 			.Load(operand2)
 			.Load(operand1)
 			.Compare(1)
-			.JG(falseAnswer.Size())
+			.JG(uint8_t(falseAnswer.Size()))
 			.Write(falseAnswer)
 			.Write(trueAnswer)
 			.Store(result)

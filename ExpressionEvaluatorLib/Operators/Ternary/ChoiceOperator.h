@@ -11,13 +11,13 @@ public:
 
 		Assembler op2;
 		op2.Load(operand2)
-			.Jmp(op3.Size());
+			.Jmp(uint8_t(op3.Size()));
 
 		return Assembler()
 			.LoadZero()
 			.Load(operand1)
 			.Compare(1)
-			.JE(op2.Size())
+			.JE(uint8_t(op2.Size()))
 			.Write(op2)
 			.Write(op3)
 			.Store(result)
