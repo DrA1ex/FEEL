@@ -2,7 +2,7 @@
 
 using namespace System::Collections::Generic;
 
-ExpressionEvaluatorNet::ExpressionEvaluator::ExpressionEvaluator(String^ expression)
+Feel::ExpressionEvaluator::ExpressionEvaluator(String^ expression)
 {
 	std::string mathExpression = msclr::interop::marshal_as<std::string>(expression);
 
@@ -20,13 +20,13 @@ ExpressionEvaluatorNet::ExpressionEvaluator::ExpressionEvaluator(String^ express
 	}
 }
 
-ExpressionEvaluatorNet::ExpressionEvaluator::~ExpressionEvaluator()
+Feel::ExpressionEvaluator::~ExpressionEvaluator()
 {
 	delete _instance;
 	_instance = nullptr;
 }
 
-double ExpressionEvaluatorNet::ExpressionEvaluator::Execute()
+double Feel::ExpressionEvaluator::Execute()
 {
 	try
 	{
@@ -42,7 +42,7 @@ double ExpressionEvaluatorNet::ExpressionEvaluator::Execute()
 	}
 }
 
-void ExpressionEvaluatorNet::ExpressionEvaluator::SetVariableValue(String^ name, double value)
+void Feel::ExpressionEvaluator::SetVariableValue(String^ name, double value)
 {
 	std::string paramName = msclr::interop::marshal_as<std::string>(name);
 	try
@@ -55,7 +55,7 @@ void ExpressionEvaluatorNet::ExpressionEvaluator::SetVariableValue(String^ name,
 	}
 }
 
-array<String^>^ ExpressionEvaluatorNet::ExpressionEvaluator::Variables()
+array<String^>^ Feel::ExpressionEvaluator::Variables()
 {
 	List<String^>^ result = gcnew List<String^>;
 
@@ -71,7 +71,7 @@ array<String^>^ ExpressionEvaluatorNet::ExpressionEvaluator::Variables()
 	return result->ToArray();
 }
 
-double ExpressionEvaluatorNet::ExpressionEvaluator::GetVariableValue(String^ name)
+double Feel::ExpressionEvaluator::GetVariableValue(String^ name)
 {
 	const Parameters &params = _instance->GetParameters();
 

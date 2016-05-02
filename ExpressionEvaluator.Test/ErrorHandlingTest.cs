@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExpressionEvaluator.Test
+namespace Feel.Test
 {
     [TestClass]
     public class ErrorHandlingTest
@@ -23,7 +23,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void DivByZeroTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1/0");
+            var expr = new ExpressionEvaluator("1/0");
 
             TestInf(expr.Execute());
         }
@@ -31,7 +31,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void ModByZeroTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1%0");
+            var expr = new ExpressionEvaluator("1%0");
 
             TestNan(expr.Execute());
         }
@@ -39,7 +39,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void UndefinedTokenTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("a^z");
+            var expr = new ExpressionEvaluator("a^z");
             TestNan(expr.Execute());
         }
 
@@ -50,7 +50,7 @@ namespace ExpressionEvaluator.Test
             try
             {
                 // ReSharper disable once UnusedVariable
-                var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("(16*)15^2)");
+                var expr = new ExpressionEvaluator("(16*)15^2)");
             }
             catch(Exception e)
             {
@@ -70,7 +70,7 @@ namespace ExpressionEvaluator.Test
             try
             {
                 // ReSharper disable once UnusedVariable
-                var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("abs e * sin");
+                var expr = new ExpressionEvaluator("abs e * sin");
             }
             catch(Exception e)
             {
@@ -86,7 +86,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void TestUnknownVariableError()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("abs a * b");
+            var expr = new ExpressionEvaluator("abs a * b");
             expr.SetVariableValue("a", 1);
 
             var throwed = false;

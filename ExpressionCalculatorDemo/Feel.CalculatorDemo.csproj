@@ -49,6 +49,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build|AnyCPU'">
+    <OutputPath>bin\Build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -65,7 +74,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj">
       <Project>{f800c13b-6df1-4cd1-bf56-dd83e6cd04ec}</Project>
-      <Name>ExpressionEvaluatorNet</Name>
+      <Name>Feel.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -92,8 +101,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\ExpressionEvaluatorLib.dll $(TargetDir) /Y
-xcopy $(SolutionDir)$(ConfigurationName)\ExpressionEvaluatorLib.pdb $(TargetDir) /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\Feel.dll $(TargetDir) /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

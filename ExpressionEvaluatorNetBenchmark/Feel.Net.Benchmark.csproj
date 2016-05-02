@@ -7,8 +7,8 @@
     <ProjectGuid>{229D9529-578D-4965-83C0-DF3A157EFE87}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpressionEvaluatorNetBenchmark</RootNamespace>
-    <AssemblyName>ExpressionEvaluatorNetBenchmark</AssemblyName>
+    <RootNamespace>Feel.Net.Benchmark</RootNamespace>
+    <AssemblyName>Feel.Net.Benchmark</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,6 +32,16 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build|AnyCPU'">
+    <OutputPath>bin\Build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ciloci.Flee, Version=0.9.26.0, Culture=neutral, PublicKeyToken=c8526a021ef298ed, processorArchitecture=MSIL">
       <HintPath>..\packages\Trove.FLEE.0.9.26.0\lib\net20\Ciloci.Flee.dll</HintPath>
@@ -50,7 +60,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj">
       <Project>{f800c13b-6df1-4cd1-bf56-dd83e6cd04ec}</Project>
-      <Name>ExpressionEvaluatorNet</Name>
+      <Name>Feel.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -61,7 +71,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\ExpressionEvaluatorLib.dll $(TargetDir) /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\Feel.dll $(TargetDir) /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

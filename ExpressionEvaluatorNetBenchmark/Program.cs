@@ -3,10 +3,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using Ciloci.Flee;
-using ExpressionEvaluatorNet;
+using Feel;
 using NCalc;
 
-namespace ExpressionEvaluatorNetBenchmark
+namespace Feel.Net.Benchmark
 {
     public class FeelVsManaged
     {

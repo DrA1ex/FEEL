@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExpressionEvaluator.Test
+namespace Feel.Test
 {
     [TestClass]
     public class BInaryOperatorTest
@@ -11,15 +11,15 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void AddTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1+(2+3+(4+5+6))");
+            var expr = new ExpressionEvaluator("1+(2+3+(4+5+6))");
 
-            Assert.AreEqual(1 + (2 + 3 + (4 + 5 + 6)), expr.Execute(), Delta);
+            Assert.AreEqual(1 + 2 + 3 + 4 + 5 + 6, expr.Execute(), Delta);
         }
 
         [TestMethod]
         public void SubTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1-(2-3-(4-5-6))");
+            var expr = new ExpressionEvaluator("1-(2-3-(4-5-6))");
 
             Assert.AreEqual(1 - (2 - 3 - (4 - 5 - 6)), expr.Execute(), Delta);
         }
@@ -27,7 +27,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void MulTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("6*3*8*(-7)");
+            var expr = new ExpressionEvaluator("6*3*8*(-7)");
 
             Assert.AreEqual(6 * 3 * 8 * -7, expr.Execute(), Delta);
         }
@@ -35,7 +35,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void DivTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1024/2 /4 /8");
+            var expr = new ExpressionEvaluator("1024/2 /4 /8");
 
             Assert.AreEqual(1024.0 / 2 / 4 / 8, expr.Execute(), Delta);
         }
@@ -43,7 +43,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void ModTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("9%10%5");
+            var expr = new ExpressionEvaluator("9%10%5");
 
             Assert.AreEqual(9 % 10 % 5, expr.Execute(), Delta);
         }
@@ -51,7 +51,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void PowTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("2^2^2^3");
+            var expr = new ExpressionEvaluator("2^2^2^3");
 
             Assert.AreEqual(Math.Pow(Math.Pow(Math.Pow(2.0, 2.0), 2.0), 3), expr.Execute(), Delta);
         }
@@ -59,7 +59,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void EqualTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1 + x = y + 2");
+            var expr = new ExpressionEvaluator("1 + x = y + 2");
 
             expr.SetVariableValue("x", 2);
             expr.SetVariableValue("y", 1);
@@ -75,7 +75,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void LessOrEqualTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1 + x <= y + 2");
+            var expr = new ExpressionEvaluator("1 + x <= y + 2");
 
             expr.SetVariableValue("x", 2);
             expr.SetVariableValue("y", 1);
@@ -96,7 +96,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void LessTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("x + 1 < 2 + y");
+            var expr = new ExpressionEvaluator("x + 1 < 2 + y");
 
             expr.SetVariableValue("x", 2);
             expr.SetVariableValue("y", 1);
@@ -117,7 +117,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void GreatherTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("2 + x^2 > sqrt(y) + 2");
+            var expr = new ExpressionEvaluator("2 + x^2 > sqrt(y) + 2");
 
             expr.SetVariableValue("x", 2);
             expr.SetVariableValue("y", 16);
@@ -138,7 +138,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void GreaterOrEqualTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("1 + x * 2 >= 2 * y + 1");
+            var expr = new ExpressionEvaluator("1 + x * 2 >= 2 * y + 1");
 
             expr.SetVariableValue("x", 4);
             expr.SetVariableValue("y", 2);

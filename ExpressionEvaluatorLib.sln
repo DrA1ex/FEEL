@@ -3,18 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25123.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorLib", "ExpressionEvaluatorLib\ExpressionEvaluatorLib.vcxproj", "{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Feel", "ExpressionEvaluatorLib\ExpressionEvaluatorLib.vcxproj", "{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorNet", "ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj", "{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Feel.Net", "ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj", "{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}"
 	ProjectSection(ProjectDependencies) = postProject
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C} = {83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionCalculatorDemo", "ExpressionCalculatorDemo\ExpressionCalculatorDemo.csproj", "{13EF459C-41E5-49E3-87D5-56D27371B3DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feel.CalculatorDemo", "ExpressionCalculatorDemo\Feel.CalculatorDemo.csproj", "{13EF459C-41E5-49E3-87D5-56D27371B3DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionEvaluator.Test", "ExpressionEvaluator.Test\ExpressionEvaluator.Test.csproj", "{0467BAE4-867B-470D-BC97-9AD78059F18E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feel.Test", "ExpressionEvaluator.Test\Feel.Test.csproj", "{0467BAE4-867B-470D-BC97-9AD78059F18E}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ExpressionEvaluatorBenchmark", "ExpressionEvaluatorBenchmark\ExpressionEvaluatorBenchmark.vcxproj", "{842321FB-0C94-48CF-89D2-7AEB641DA297}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Feel.Benchmark", "ExpressionEvaluatorBenchmark\ExpressionEvaluatorBenchmark.vcxproj", "{842321FB-0C94-48CF-89D2-7AEB641DA297}"
 	ProjectSection(ProjectDependencies) = postProject
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C} = {83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}
 	EndProjectSection
@@ -25,10 +25,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Demo", "Demo", "{181B977B-C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{64B82B84-AFA2-49FF-B57B-2966D6C059E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpressionEvaluatorNetBenchmark", "ExpressionEvaluatorNetBenchmark\ExpressionEvaluatorNetBenchmark.csproj", "{229D9529-578D-4965-83C0-DF3A157EFE87}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feel.Net.Benchmark", "ExpressionEvaluatorNetBenchmark\Feel.Net.Benchmark.csproj", "{229D9529-578D-4965-83C0-DF3A157EFE87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Build|Any CPU = Build|Any CPU
+		Build|Mixed Platforms = Build|Mixed Platforms
+		Build|Win32 = Build|Win32
+		Build|x64 = Build|x64
 		Debug|Any CPU = Debug|Any CPU
 		Debug|Mixed Platforms = Debug|Mixed Platforms
 		Debug|Win32 = Debug|Win32
@@ -39,6 +43,12 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|Any CPU.ActiveCfg = Build|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|Mixed Platforms.ActiveCfg = Build|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|Mixed Platforms.Build.0 = Build|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|Win32.ActiveCfg = Build|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|Win32.Build.0 = Build|Win32
+		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Build|x64.ActiveCfg = Build|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -51,6 +61,12 @@ Global
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Win32.ActiveCfg = Release|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|Win32.Build.0 = Release|Win32
 		{83A4FB2F-AB7F-4BF7-9A95-A81BF8051C2C}.Release|x64.ActiveCfg = Release|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|Any CPU.ActiveCfg = Build|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|Mixed Platforms.ActiveCfg = Build|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|Mixed Platforms.Build.0 = Build|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|Win32.ActiveCfg = Build|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|Win32.Build.0 = Build|Win32
+		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Build|x64.ActiveCfg = Build|Win32
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -63,6 +79,13 @@ Global
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Win32.ActiveCfg = Release|Win32
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|Win32.Build.0 = Release|Win32
 		{F800C13B-6DF1-4CD1-BF56-DD83E6CD04EC}.Release|x64.ActiveCfg = Release|Win32
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|Any CPU.ActiveCfg = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|Any CPU.Build.0 = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|Mixed Platforms.ActiveCfg = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|Win32.ActiveCfg = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|Win32.Build.0 = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|x64.ActiveCfg = Build|Any CPU
+		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Build|x64.Build.0 = Build|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -77,6 +100,13 @@ Global
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|Win32.ActiveCfg = Release|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|x64.ActiveCfg = Release|Any CPU
 		{13EF459C-41E5-49E3-87D5-56D27371B3DF}.Release|x64.Build.0 = Release|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|Any CPU.ActiveCfg = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|Any CPU.Build.0 = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|Mixed Platforms.ActiveCfg = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|Win32.ActiveCfg = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|Win32.Build.0 = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|x64.ActiveCfg = Build|Any CPU
+		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Build|x64.Build.0 = Build|Any CPU
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -91,6 +121,12 @@ Global
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|Win32.ActiveCfg = Release|Any CPU
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|x64.ActiveCfg = Release|Any CPU
 		{0467BAE4-867B-470D-BC97-9AD78059F18E}.Release|x64.Build.0 = Release|Any CPU
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|Any CPU.ActiveCfg = Build|Win32
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|Mixed Platforms.ActiveCfg = Build|Win32
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|Win32.ActiveCfg = Build|Win32
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|Win32.Build.0 = Build|Win32
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|x64.ActiveCfg = Build|x64
+		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Build|x64.Build.0 = Build|x64
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Debug|Any CPU.ActiveCfg = Debug|Win32
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Debug|Mixed Platforms.ActiveCfg = Debug|Win32
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Debug|Mixed Platforms.Build.0 = Debug|Win32
@@ -105,6 +141,13 @@ Global
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Release|Win32.Build.0 = Release|Win32
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Release|x64.ActiveCfg = Release|x64
 		{842321FB-0C94-48CF-89D2-7AEB641DA297}.Release|x64.Build.0 = Release|x64
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|Any CPU.ActiveCfg = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|Any CPU.Build.0 = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|Mixed Platforms.ActiveCfg = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|Win32.ActiveCfg = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|Win32.Build.0 = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|x64.ActiveCfg = Build|Any CPU
+		{229D9529-578D-4965-83C0-DF3A157EFE87}.Build|x64.Build.0 = Build|Any CPU
 		{229D9529-578D-4965-83C0-DF3A157EFE87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{229D9529-578D-4965-83C0-DF3A157EFE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{229D9529-578D-4965-83C0-DF3A157EFE87}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU

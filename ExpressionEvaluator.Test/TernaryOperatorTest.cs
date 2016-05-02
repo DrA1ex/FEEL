@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExpressionEvaluator.Test
+namespace Feel.Test
 {
     [TestClass]
     public class TernaryOperatorTest
@@ -8,7 +8,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void Choice()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("choice(i, nonZero, zero)");
+            var expr = new ExpressionEvaluator("choice(i, nonZero, zero)");
 
             expr.SetVariableValue("zero", 10);
             expr.SetVariableValue("nonZero", 11);
@@ -26,7 +26,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void Choice2()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("choice(a + 10 <= b - 20, 1, 0)");
+            var expr = new ExpressionEvaluator("choice(a + 10 <= b - 20, 1, 0)");
 
             expr.SetVariableValue("a", -20);
             expr.SetVariableValue("b", 30);

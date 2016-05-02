@@ -5,7 +5,7 @@
 
 using namespace System;
 
-namespace ExpressionEvaluatorNet {
+namespace Feel {
 
 	public ref class ExpressionEvaluator
 	{

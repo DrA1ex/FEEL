@@ -1,5 +1,5 @@
 ﻿using System;
-using ExpressionEvaluatorNet;
+using Feel;
 
 namespace ExpressionCalculatorDemo
 {

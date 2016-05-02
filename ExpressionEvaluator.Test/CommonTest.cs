@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ExpressionEvaluator.Test
+namespace Feel.Test
 {
     [TestClass]
     public class CommonTest
@@ -27,7 +27,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void ExpressionParseTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("15^2-4*15^3+7*8*9-150^2");
+            var expr = new ExpressionEvaluator("15^2-4*15^3+7*8*9-150^2");
 
             Assert.AreEqual(-35271, expr.Execute(), Delta);
         }
@@ -35,9 +35,9 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void ExtendedExpressionParseTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("( abs( floor x )%2 )*( ( x^2 )/100 ) " +
-                                                                      "+ ( abs( floor( x+1 ) )%2 )*( sqrt( abs( x )" +
-                                                                      "*( 100 - abs( x ) ) ) + 100 ) + 10");
+            var expr = new ExpressionEvaluator("( abs( floor x )%2 )*( ( x^2 )/100 ) " +
+                                               "+ ( abs( floor( x+1 ) )%2 )*( sqrt( abs( x )" +
+                                               "*( 100 - abs( x ) ) ) + 100 ) + 10");
             expr.SetVariableValue("x", -0.3);
 
             Assert.AreEqual(10.0009, expr.Execute(), Delta);
@@ -46,9 +46,9 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void ExtendedExpressionParseTest2()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("( abs( x )%2 )*( ( x^2 )/100 ) " +
-                                                                      "+ ( abs( x+1 )%2 )*( sqrt( abs( x )" +
-                                                                      "*( 100 - abs( x ) ) ) + 100 ) + 10");
+            var expr = new ExpressionEvaluator("( abs( x )%2 )*( ( x^2 )/100 ) " +
+                                               "+ ( abs( x+1 )%2 )*( sqrt( abs( x )" +
+                                               "*( 100 - abs( x ) ) ) + 100 ) + 10");
             expr.SetVariableValue("x", -0.6);
 
             Assert.AreEqual(53.0912375322, expr.Execute(), Delta);
@@ -57,7 +57,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void VariableParseTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("x^y+(a^b)/c");
+            var expr = new ExpressionEvaluator("x^y+(a^b)/c");
             expr.SetVariableValue("x", -0.3);
             expr.SetVariableValue("x", 5);
             expr.SetVariableValue("y", 2);
@@ -71,7 +71,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void LongComputeTest()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
+            var expr = new ExpressionEvaluator(GenericExpression);
 
             const double step = 0.01;
             double sum = 0;
@@ -100,8 +100,8 @@ namespace ExpressionEvaluator.Test
             {
                 threads.Add(Thread.CurrentThread.ManagedThreadId);
 
-                var expression = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
-                expression.SetVariableValue(GenericExpressionArgument, i* step);
+                var expression = new ExpressionEvaluator(GenericExpression);
+                expression.SetVariableValue(GenericExpressionArgument, i * step);
 
                 return expression.Execute();
             })).ToArray();
@@ -127,7 +127,7 @@ namespace ExpressionEvaluator.Test
             {
                 threads.Add(Thread.CurrentThread.ManagedThreadId);
 
-                var expression = new ExpressionEvaluatorNet.ExpressionEvaluator(GenericExpression);
+                var expression = new ExpressionEvaluator(GenericExpression);
                 return testRange.Select(rangeIndex =>
                 {
                     expression.SetVariableValue(GenericExpressionArgument, getValueFromIndex(rangeIndex));
@@ -141,7 +141,7 @@ namespace ExpressionEvaluator.Test
             var wrongResults = expressionResults.Where(v => Math.Abs(v - testResult) > Delta).ToArray();
             if(wrongResults.Any())
             {
-                Assert.Fail($"Test failed with {wrongResults.Length} wrong results: {String.Join(", ",wrongResults.Distinct())}");
+                Assert.Fail($"Test failed with {wrongResults.Length} wrong results: {string.Join(", ", wrongResults.Distinct())}");
             }
 
             Assert.IsTrue(threads.Distinct().Count() > 1, "Test was executed in 1 thread. Result isn't relaible");
@@ -150,7 +150,7 @@ namespace ExpressionEvaluator.Test
         [TestMethod]
         public void TestVariables()
         {
-            var expr = new ExpressionEvaluatorNet.ExpressionEvaluator("cos(a)+b+sin(c+d^x)^abs(y^z)");
+            var expr = new ExpressionEvaluator("cos(a)+b+sin(c+d^x)^abs(y^z)");
 
             var variables = new[]
             {
@@ -165,17 +165,17 @@ namespace ExpressionEvaluator.Test
             var errors = new[]
             {
                 missingVariables.Any()
-                    ? $"Expression miss variables: \"{String.Join(", ", missingVariables)}\""
+                    ? $"Expression miss variables: \"{string.Join(", ", missingVariables)}\""
                     : null,
                 extraVariables.Any()
-                    ? $"Expression has extra variables: \"{String.Join(", ", extraVariables)}\""
+                    ? $"Expression has extra variables: \"{string.Join(", ", extraVariables)}\""
                     : null
             }.Where(e => e != null).ToArray();
 
 
             if(errors.Any())
             {
-                Assert.Fail(String.Join(Environment.NewLine, errors));
+                Assert.Fail(string.Join(Environment.NewLine, errors));
             }
         }
     }

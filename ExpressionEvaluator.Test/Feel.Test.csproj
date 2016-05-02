@@ -6,8 +6,8 @@
     <ProjectGuid>{0467BAE4-867B-470D-BC97-9AD78059F18E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ExpressionEvaluator.Test</RootNamespace>
-    <AssemblyName>ExpressionEvaluator.Test</AssemblyName>
+    <RootNamespace>Feel.Test</RootNamespace>
+    <AssemblyName>Feel.Test</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -38,6 +38,15 @@
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
     <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Build|AnyCPU'">
+    <OutputPath>bin\Build\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -70,7 +79,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj">
       <Project>{f800c13b-6df1-4cd1-bf56-dd83e6cd04ec}</Project>
-      <Name>ExpressionEvaluatorNet</Name>
+      <Name>Feel.Net</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>
@@ -94,7 +103,7 @@
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\ExpressionEvaluatorLib.dll $(TargetDir) /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy $(SolutionDir)$(ConfigurationName)\Feel.dll $(TargetDir) /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
