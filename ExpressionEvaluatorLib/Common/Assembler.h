@@ -175,7 +175,11 @@ public:
 
 	//FCOMI
 	//Compare two values: st(0) and st(N)
-	Assembler &Compare(Byte registerNumber);
+	Assembler &Compare(Byte registerNumber = 1);
+
+	//FCOMIP
+	//Compare two values and pop: st(0) and st(N)
+	Assembler &CompareAndPop(Byte registerNumber = 1);
 
 	//JMP NEAR
 	Assembler &Jmp(int8_t offset);

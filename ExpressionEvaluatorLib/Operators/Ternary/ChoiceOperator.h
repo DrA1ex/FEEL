@@ -31,7 +31,7 @@ public:
 
 	OperatorPriority Priority() const override 
 	{
-		return OperatorBase::Highest;
+		return OperatorBase::Lowest;
 	}
 
 	

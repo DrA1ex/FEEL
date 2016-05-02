@@ -75,6 +75,7 @@
     <Compile Include="CommonTest.cs" />
     <Compile Include="ErrorHandlingTest.cs" />
     <Compile Include="TernaryOperatorTest.cs" />
+    <Compile Include="LogicOperatorTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ExpressionEvaluatorNet\ExpressionEvaluatorNet.vcxproj">

@@ -48,6 +48,9 @@
     <Filter Include="Headers\Operators\Ternary\Base">
       <UniqueIdentifier>{ccdc04ce-ac16-43f9-9d1e-ba94b8f05d60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Headers\Operators\Logic">
+      <UniqueIdentifier>{fbccd7bf-0a3b-4112-832f-df55bbdd2641}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Expression\ExpressionImplementation.h">
@@ -144,6 +147,18 @@
       <Filter>Headers</Filter>
     </ClInclude>
     <ClInclude Include="Operators\Binary\LessOrEqualOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\NotEqualOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\AndOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\Binary\OrOperator.h">
+      <Filter>Headers</Filter>
+    </ClInclude>
+    <ClInclude Include="Operators\AllOperators.h">
       <Filter>Headers</Filter>
     </ClInclude>
   </ItemGroup>

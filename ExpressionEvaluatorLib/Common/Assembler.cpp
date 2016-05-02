@@ -367,6 +367,17 @@ Assembler& Assembler::Compare(Byte registerNumber)
 	return *this;
 }
 
+Assembler& Assembler::CompareAndPop(Byte registerNumber)
+{
+	if (registerNumber > 8)
+		throw std::logic_error("FPU register must be in 0-7");
+
+	Write<Byte>(0xDF);
+	Write<Byte>(0xF0 | registerNumber);
+
+	return *this;
+}
+
 Assembler& Assembler::Jmp(int8_t offset)
 {
 	Write(Byte(0xEB), offset);

@@ -125,7 +125,9 @@
     <ClInclude Include="Expression\Internal\Lexeme.h" />
     <ClInclude Include="Expression\Internal\Token.h" />
     <ClInclude Include="Helpers.h" />
+    <ClInclude Include="Operators\AllOperators.h" />
     <ClInclude Include="Operators\Binary\AddOperator.h" />
+    <ClInclude Include="Operators\Binary\AndOperator.h" />
     <ClInclude Include="Operators\Binary\Base\BinaryOperatorBase.h" />
     <ClInclude Include="Operators\Binary\DivOperator.h" />
     <ClInclude Include="Operators\Binary\EqualOperator.h" />
@@ -135,6 +137,8 @@
     <ClInclude Include="Operators\Binary\LessOrEqualOperator.h" />
     <ClInclude Include="Operators\Binary\ModOperator.h" />
     <ClInclude Include="Operators\Binary\MulOperator.h" />
+    <ClInclude Include="Operators\Binary\NotEqualOperator.h" />
+    <ClInclude Include="Operators\Binary\OrOperator.h" />
     <ClInclude Include="Operators\Binary\PowOperator.h" />
     <ClInclude Include="Operators\Binary\SubOperator.h" />
     <ClInclude Include="Operators\OperatorBase.h" />

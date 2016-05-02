@@ -40,5 +40,17 @@ namespace Feel.Test
             expr.SetVariableValue("b", 40);
             Assert.AreEqual(1, expr.Execute());
         }
+
+        [TestMethod]
+        public void CommaTest()
+        {
+            Assert.AreEqual(1, new ExpressionEvaluator("choice(-1^2, 1, 0)").Execute());
+
+            Assert.AreEqual(-1, new ExpressionEvaluator("choice(-1^2, -1, 0)").Execute());
+
+            Assert.AreEqual(-1, new ExpressionEvaluator("choice(-(1^2), -1, 0)").Execute());
+
+            Assert.AreEqual(0, new ExpressionEvaluator("choice(-1 - -(1^2), -1, 0)").Execute());
+        }
     }
 }

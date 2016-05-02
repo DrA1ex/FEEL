@@ -18,7 +18,7 @@ public:
 
 	enum OperatorPriority
 	{
-		Low, Normal, High, Higher, Highest
+		Lowest, Lower, Low, Normal, High, Higher, Highest
 	};
 
 	virtual ~OperatorBase() {}
