@@ -12,7 +12,7 @@ For .NET version:
     Install-Package Feel.Net
 
 For C++:
-See [releases](https://github.com/DrA1ex/ExpressionEvaluatorLib/releases]) section
+See [releases](https://github.com/DrA1ex/FEEL/releases) section
 
 Features:
 ---
