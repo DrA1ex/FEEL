@@ -17,6 +17,10 @@ Also you can see [Tests](https://github.com/DrA1ex/FEEL/tree/master/ExpressionEv
 
 Installation:
 ---
+For all platforms:
+
+FEEL require Visual C++ 2015 Redistributable. You can download it from here: https://www.microsoft.com/download/details.aspx?id=48145
+
 For .NET version:
 
     Install-Package Feel.Net
